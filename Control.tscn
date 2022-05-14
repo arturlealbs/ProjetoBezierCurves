@@ -17,7 +17,7 @@ margin_bottom = 1080.0
 margin_right = 115.0
 margin_bottom = 1080.0
 
-[node name="add_Button3" type="Button" parent="Control/Panel"]
+[node name="addButton" type="Button" parent="Control/Panel"]
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 56.0
@@ -30,7 +30,17 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="add_Button4" type="Button" parent="Control/Panel"]
+[node name="delButton" type="Button" parent="Control/Panel"]
+margin_left = 59.0
+margin_top = 4.0
+margin_right = 111.0
+margin_bottom = 56.0
+rect_pivot_offset = Vector2( 63, 61 )
+hint_tooltip = "Adicionar nova curva"
+keep_pressed_outside = true
+text = "x"
+
+[node name="prevButton" type="Button" parent="Control/Panel"]
 margin_left = 4.0
 margin_top = 59.0
 margin_right = 56.0
@@ -40,7 +50,7 @@ hint_tooltip = "Adicionar nova curva"
 keep_pressed_outside = true
 text = "<"
 
-[node name="add_Button5" type="Button" parent="Control/Panel"]
+[node name="nextButton" type="Button" parent="Control/Panel"]
 margin_left = 59.0
 margin_top = 59.0
 margin_right = 111.0
@@ -49,16 +59,6 @@ rect_pivot_offset = Vector2( 44, 13 )
 hint_tooltip = "Adicionar nova curva"
 keep_pressed_outside = true
 text = ">"
-
-[node name="add_Button2" type="Button" parent="Control/Panel"]
-margin_left = 59.0
-margin_top = 4.0
-margin_right = 111.0
-margin_bottom = 56.0
-rect_pivot_offset = Vector2( 63, 61 )
-hint_tooltip = "Adicionar nova curva"
-keep_pressed_outside = true
-text = "x"
 
 [node name="SpinBox" type="SpinBox" parent="Control/Panel"]
 margin_left = 5.0
@@ -89,3 +89,8 @@ margin_top = 175.0
 margin_right = 29.0
 margin_bottom = 199.0
 text = "Points"
+
+[connection signal="pressed" from="Control/Panel/addButton" to="Node2D" method="_on_addButton_pressed"]
+[connection signal="pressed" from="Control/Panel/delButton" to="Node2D" method="_on_delButton_pressed"]
+[connection signal="pressed" from="Control/Panel/prevButton" to="Node2D" method="_on_prevButton_pressed"]
+[connection signal="pressed" from="Control/Panel/nextButton" to="Node2D" method="_on_nextButton_pressed"]
