@@ -80,8 +80,8 @@ func _draw() -> void:
 				for vertex in range (len(polygon.points) - 1):
 					draw_line(polygon.points[vertex], polygon.points[vertex + 1], Color(1,0,0))
 			if len(polygon.points) > 2:	
-				for point in range(len(scene[selectedIndex].bezierCurve) - 1):
-					draw_line(scene[selectedIndex].bezierCurve[point], scene[selectedIndex].bezierCurve[point + 1], Color(0,1,0))
+				for point in range(len(polygon.bezierCurve) - 1):
+					draw_line(polygon.bezierCurve[point], polygon.bezierCurve[point + 1], Color(0,1,0))
 		else:
 			for point in polygon.points:
 				draw_circle(point, 10, Color(0.33, 0.33, 0.33, 1))
@@ -89,5 +89,5 @@ func _draw() -> void:
 				for vertex in range (len(polygon.points) - 1):
 					draw_line(polygon.points[vertex], polygon.points[vertex + 1], Color(0.33, 0.33, 0.33, 1))
 			if len(polygon.points) > 2:
-				for point in range(len(scene[selectedIndex].bezierCurve) - 1):
-					draw_line(scene[selectedIndex].bezierCurve[point], scene[selectedIndex].bezierCurve[point + 1], Color(0,0,1))
+				for point in range(len(polygon.bezierCurve) - 1):
+					draw_line(polygon.bezierCurve[point], polygon.bezierCurve[point + 1], Color(0,0,1))
