@@ -23,25 +23,25 @@ func bezierEquation(controlPoints, evaluation):
 		bezierCurve.append(aux[0])
 	return(bezierCurve)
 
-var eval := 6
+var eval := 100
 var scene := []
 var selectedIndex := -1
+var drawPoints := true
+var drawLines := true
+var drawCurve := true
 
-###	Adiciona um ponto de controle à cena
 func _on_addButton_pressed():
 	print("Adicionou")
 	scene.append(ControlPoints.new())
 	selectedIndex += 1
 	update()
 
-###	Remove um ponto de controle da cena	
 func _on_delButton_pressed():
 	print("Deletou")
 	scene.pop_at(selectedIndex)
 	selectedIndex -= 1
 	update()
 
-### Avança para a próxima curva
 func _on_prevButton_pressed():
 	print("voltou")
 	if selectedIndex == len(scene) - 1:
@@ -50,7 +50,6 @@ func _on_prevButton_pressed():
 		selectedIndex += 1
 	update()
 
-### Retrocede para a curva anterior
 func _on_nextButton_pressed():
 	print("avancou")
 	if selectedIndex == 0:
@@ -59,7 +58,24 @@ func _on_nextButton_pressed():
 		selectedIndex -= 1
 	update()
 
-# Verifica o evento de clique com o botão do mouse
+func _on_evalButton_value_changed(value):
+	eval = value
+	if selectedIndex >= 0:
+		scene[selectedIndex].bezierCurve = bezierEquation(scene[selectedIndex],eval)
+	update()
+
+func _on_viewPoints_pressed():
+	drawPoints = !drawPoints
+	update()
+
+func _on_viewPolygon_pressed():
+	drawLines = !drawLines
+	update()
+
+func _on_viewCurve_pressed():
+	drawCurve = !drawCurve
+	update()
+
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.pressed:
@@ -74,20 +90,26 @@ func _input(event):
 func _draw() -> void:
 	for polygon in scene:
 		if scene[selectedIndex] == polygon:
-			for point in polygon.points:
-				draw_circle(point, 10, Color(1,0,0))
-			if len(polygon.points) > 1:
-				for vertex in range (len(polygon.points) - 1):
-					draw_line(polygon.points[vertex], polygon.points[vertex + 1], Color(1,0,0))
-			if len(polygon.points) > 2:	
-				for point in range(len(polygon.bezierCurve) - 1):
-					draw_line(polygon.bezierCurve[point], polygon.bezierCurve[point + 1], Color(0,1,0))
+			if drawPoints:
+				for point in polygon.points:
+					draw_circle(point, 5, Color(1,0,0))
+			if drawLines:
+				if len(polygon.points) > 1:
+					for vertex in range (len(polygon.points) - 1):
+						draw_line(polygon.points[vertex], polygon.points[vertex + 1], Color(1,0,0),1)
+			if drawCurve:
+				if len(polygon.points) > 2:	
+					for point in range(len(polygon.bezierCurve) - 1):
+						draw_line(polygon.bezierCurve[point], polygon.bezierCurve[point + 1], Color(0,1,0), 4)
 		else:
-			for point in polygon.points:
-				draw_circle(point, 10, Color(0.33, 0.33, 0.33, 1))
-			if len(polygon.points) > 1:
-				for vertex in range (len(polygon.points) - 1):
-					draw_line(polygon.points[vertex], polygon.points[vertex + 1], Color(0.33, 0.33, 0.33, 1))
-			if len(polygon.points) > 2:
-				for point in range(len(polygon.bezierCurve) - 1):
-					draw_line(polygon.bezierCurve[point], polygon.bezierCurve[point + 1], Color(0,0,1))
+			if drawPoints:
+				for point in polygon.points:
+					draw_circle(point, 5, Color(0.35, 0.35, 0.35, 1))
+			if drawLines:
+				if len(polygon.points) > 1:
+					for vertex in range (len(polygon.points) - 1):
+						draw_line(polygon.points[vertex], polygon.points[vertex + 1], Color(0.35, 0.35, 0.35, 1), 1)
+			if drawCurve:
+				if len(polygon.points) > 2:
+					for point in range(len(polygon.bezierCurve) - 1):
+						draw_line(polygon.bezierCurve[point], polygon.bezierCurve[point + 1], Color(0.35,0.35,0.35,1), 4)

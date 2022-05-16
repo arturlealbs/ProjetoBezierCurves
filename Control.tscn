@@ -60,37 +60,46 @@ hint_tooltip = "Adicionar nova curva"
 keep_pressed_outside = true
 text = ">"
 
-[node name="SpinBox" type="SpinBox" parent="Control/Panel"]
+[node name="evalButton" type="SpinBox" parent="Control/Panel"]
 margin_left = 5.0
 margin_top = 114.0
 margin_right = 111.0
 margin_bottom = 166.0
+min_value = 1.0
 max_value = 10.0
+value = 6.0
 rounded = true
 allow_greater = true
 
-[node name="CheckBox" type="CheckBox" parent="Control/Panel"]
-margin_left = 5.0
-margin_top = 192.0
-margin_right = 29.0
-margin_bottom = 216.0
-text = "Poligonals"
-
-[node name="CheckBox2" type="CheckBox" parent="Control/Panel"]
-margin_left = 5.0
-margin_top = 209.0
-margin_right = 29.0
-margin_bottom = 233.0
-text = "Curves"
-
-[node name="CheckBox3" type="CheckBox" parent="Control/Panel"]
+[node name="viewPoints" type="CheckBox" parent="Control/Panel"]
 margin_left = 5.0
 margin_top = 175.0
-margin_right = 29.0
+margin_right = 73.0
 margin_bottom = 199.0
+pressed = true
 text = "Points"
+
+[node name="viewPolygon" type="CheckBox" parent="Control/Panel"]
+margin_left = 5.0
+margin_top = 192.0
+margin_right = 98.0
+margin_bottom = 216.0
+pressed = true
+text = "Poligonals"
+
+[node name="viewCurve" type="CheckBox" parent="Control/Panel"]
+margin_left = 5.0
+margin_top = 209.0
+margin_right = 76.0
+margin_bottom = 233.0
+pressed = true
+text = "Curves"
 
 [connection signal="pressed" from="Control/Panel/addButton" to="Node2D" method="_on_addButton_pressed"]
 [connection signal="pressed" from="Control/Panel/delButton" to="Node2D" method="_on_delButton_pressed"]
 [connection signal="pressed" from="Control/Panel/prevButton" to="Node2D" method="_on_prevButton_pressed"]
 [connection signal="pressed" from="Control/Panel/nextButton" to="Node2D" method="_on_nextButton_pressed"]
+[connection signal="value_changed" from="Control/Panel/evalButton" to="Node2D" method="_on_evalButton_value_changed"]
+[connection signal="pressed" from="Control/Panel/viewPoints" to="Node2D" method="_on_viewPoints_pressed"]
+[connection signal="pressed" from="Control/Panel/viewPolygon" to="Node2D" method="_on_viewPolygon_pressed"]
+[connection signal="pressed" from="Control/Panel/viewCurve" to="Node2D" method="_on_viewCurve_pressed"]
