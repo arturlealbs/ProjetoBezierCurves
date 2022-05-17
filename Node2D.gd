@@ -12,7 +12,7 @@ func interpolate(p0, p1, te):
 func bezierEquation(controlPoints, evaluation):
 	var t = 0
 	var bezierCurve = []
-	while t < 1:
+	for _j in range(evaluation+1):
 		var aux = controlPoints.points
 		while(len(aux) > 1):
 			var temp = []
