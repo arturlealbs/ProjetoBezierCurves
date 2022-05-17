@@ -1,5 +1,14 @@
 extends Node2D
 
+var eval := 1
+var scene := []
+var selectedIndex := -1
+var drawPoints := true
+var drawLines := true
+var drawCurve := true
+var selectedPoint
+var isSelected := false
+
 class ControlPoints:
 	var points = []
 	var isSelected := true
@@ -12,13 +21,8 @@ func interpolate(p0, p1, te):
 func bezierEquation(controlPoints, evaluation):
 	var t = 0
 	var bezierCurve = []
-<<<<<<< HEAD
 	for _j in range(evaluation+1):
-=======
-	while t <= 1:
->>>>>>> 67a6840d65031bf886b9ff0fb19efade319ac40a
 		var aux = controlPoints.points
-		var lastIndex = len(aux) - 1
 		while(len(aux) > 1):
 			var temp = []
 			for i in range(0, len(aux) - 1):
@@ -26,17 +30,7 @@ func bezierEquation(controlPoints, evaluation):
 			aux = temp
 		t += float(1)/evaluation
 		bezierCurve.append(aux[0])
-		#print(t)
-		if len(bezierCurve) == evaluation:
-			bezierCurve.append(controlPoints.points[len(controlPoints.points) - 1])
 	return(bezierCurve)
-
-var eval := 1
-var scene := []
-var selectedIndex := -1
-var drawPoints := true
-var drawLines := true
-var drawCurve := true
 
 func _on_addButton_pressed():
 	print("Adicionou")
@@ -86,15 +80,39 @@ func _on_viewCurve_pressed():
 
 func _input(event):
 	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_LEFT:
+		if event.button_index == BUTTON_RIGHT:
 			if event.pressed:
-				if len(scene) == 0:
-					pass
-				else:
+				if selectedIndex > - 1:
 					if event.position[0] > 115:
 						scene[selectedIndex].points.append(event.position)
 						scene[selectedIndex].bezierCurve = bezierEquation(scene[selectedIndex],eval)
 						update()
+		if event.button_index == BUTTON_LEFT:
+			if event.pressed:
+				if selectedIndex > -1:
+					for i in range(len(scene[selectedIndex].points)):
+						if event.position.distance_to(scene[selectedIndex].points[i]) < 7:
+							isSelected = !isSelected
+							selectedPoint = i
+							break
+		if event.button_index == BUTTON_MIDDLE:
+			if event.pressed:
+				if selectedIndex > -1:
+					for i in range(len(scene[selectedIndex].points)):
+						if event.position.distance_to(scene[selectedIndex].points[i]) < 7:
+							scene[selectedIndex].points.remove(i)
+							if len(scene[selectedIndex].points) > 0:
+								scene[selectedIndex].bezierCurve = bezierEquation(scene[selectedIndex],eval)
+							else:
+								scene.remove(selectedIndex)
+								selectedIndex -= 1
+							update()
+							break
+				
+	if isSelected:
+		scene[selectedIndex].points[selectedPoint] = event.position
+		scene[selectedIndex].bezierCurve = bezierEquation(scene[selectedIndex],eval)
+		update()	
 
 func _draw() -> void:
 	for polygon in scene:
