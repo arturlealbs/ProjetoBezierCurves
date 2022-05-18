@@ -42,7 +42,8 @@ func _on_nextButton_pressed():
 func _on_evalButton_value_changed(value):
 	num_evals = value
 	if selectedCurveIndex >= 0:
-		bezierCurves[selectedCurveIndex].updateCurvePoints(num_evals)
+		var selectedCurve: BezierCurve = bezierCurves[selectedCurveIndex]
+		selectedCurve.updateCurvePoints(num_evals)
 	update()
 
 func _on_viewPoints_pressed():
@@ -59,8 +60,10 @@ func _on_viewCurve_pressed():
 
 func getSelectedPointIndex(mousePosition: Vector2) -> int:
 	# TODO: use squared distance
-	for i in range(len(bezierCurves[selectedCurveIndex].controlPoints)):
-		if mousePosition.distance_to(bezierCurves[selectedCurveIndex].controlPoints[i]) < 7:
+	# TODO: use for controlPoint in selectedCurve.controlPoints
+	var selectedCurve: BezierCurve = bezierCurves[selectedCurveIndex]
+	for i in range(len(selectedCurve.controlPoints)):
+		if mousePosition.distance_to(selectedCurve.controlPoints[i]) < 7:
 			return i
 	return -1
 
@@ -79,12 +82,12 @@ func isToggleDragPoint(event: InputEvent) -> bool:
 func isDeletePoint(event: InputEvent) -> bool:
 	return isCurveEdition(event) and event.button_index == BUTTON_MIDDLE
 
-# TODO: always do curve = bezierCurves[selectedCurveIndex]
 func _input(event):
 
 	if isAddControlPoint(event):
-		bezierCurves[selectedCurveIndex].controlPoints.append(event.position)
-		bezierCurves[selectedCurveIndex].updateCurvePoints(num_evals)
+		var selectedCurve: BezierCurve = bezierCurves[selectedCurveIndex]
+		selectedCurve.controlPoints.append(event.position)
+		selectedCurve.updateCurvePoints(num_evals)
 		update()
 	
 	elif isToggleDragPoint(event):
@@ -93,25 +96,29 @@ func _input(event):
 			isSelected = !isSelected
 	
 	elif isDeletePoint(event):
-		for i in range(len(bezierCurves[selectedCurveIndex].controlPoints)):
-			if event.position.distance_to(bezierCurves[selectedCurveIndex].controlPoints[i]) < 7:
-				bezierCurves[selectedCurveIndex].controlPoints.remove(i)
-				if len(bezierCurves[selectedCurveIndex].controlPoints) > 0:
-					bezierCurves[selectedCurveIndex].updateCurvePoints(num_evals)
+		var selectedCurve: BezierCurve = bezierCurves[selectedCurveIndex]
+		for i in range(len(selectedCurve.controlPoints)):
+			if event.position.distance_to(selectedCurve.controlPoints[i]) < 7:
+				selectedCurve.controlPoints.remove(i)
+				if len(selectedCurve.controlPoints) > 0:
+					selectedCurve.updateCurvePoints(num_evals)
 				else:
 					bezierCurves.remove(selectedCurveIndex)
 					selectedCurveIndex -= 1
+					selectedCurve = bezierCurves[selectedCurveIndex]
 				update()
 				break
 
 	if isSelected:
-		bezierCurves[selectedCurveIndex].controlPoints[selectedPointIndex] = event.position
-		bezierCurves[selectedCurveIndex].updateCurvePoints(num_evals)
+		var selectedCurve: BezierCurve = bezierCurves[selectedCurveIndex]
+		selectedCurve.controlPoints[selectedPointIndex] = event.position
+		selectedCurve.updateCurvePoints(num_evals)
 		update()
 
 func _draw() -> void:
 	for polygon in bezierCurves:
-		if bezierCurves[selectedCurveIndex] == polygon:
+		var selectedCurve: BezierCurve = bezierCurves[selectedCurveIndex]
+		if selectedCurve == polygon:
 			if drawCurve:
 				if len(polygon.controlPoints) > 1:	
 					for point in range(len(polygon.curvePoints) - 1):
