@@ -97,7 +97,7 @@ func _draw() -> void:
 	for polygon in scene:
 		if scene[selectedIndex] == polygon:
 			if drawCurve:
-				if len(polygon.controlPoints) > 2:	
+				if len(polygon.controlPoints) > 1:	
 					for point in range(len(polygon.curvePoints) - 1):
 						draw_line(polygon.curvePoints[point], polygon.curvePoints[point + 1], Color(0,1,0), 2)
 			if drawPoints:
@@ -109,7 +109,7 @@ func _draw() -> void:
 						draw_line(polygon.controlPoints[vertex], polygon.controlPoints[vertex + 1], Color(1,0,0),1)
 		else:
 			if drawCurve:
-				if len(polygon.controlPoints) > 2:
+				if len(polygon.controlPoints) > 1:
 					for point in range(len(polygon.curvePoints) - 1):
 						draw_line(polygon.curvePoints[point], polygon.curvePoints[point + 1], Color(0.35,0.35,0.35,1), 2)
 			if drawPoints:
