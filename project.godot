@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="BezierCurves - PG"
-run/main_scene="res://Control.tscn"
+run/main_scene="res://src/scenes/Control.tscn"
 config/icon="res://icon.png"
 
 [display]
