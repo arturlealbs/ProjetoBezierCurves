@@ -1,6 +1,6 @@
 extends Node2D
 
-var eval := 2
+var num_evals := 2
 var scene := []
 var selectedIndex := -1
 var drawPoints := true
@@ -40,9 +40,9 @@ func _on_nextButton_pressed():
 	update()
 
 func _on_evalButton_value_changed(value):
-	eval = value
+	num_evals = value
 	if selectedIndex >= 0:
-		scene[selectedIndex].updateCurvePoints(eval)
+		scene[selectedIndex].updateCurvePoints(num_evals)
 	update()
 
 func _on_viewPoints_pressed():
@@ -64,7 +64,7 @@ func _input(event):
 				if selectedIndex > - 1:
 					if event.position[0] > 115:
 						scene[selectedIndex].controlPoints.append(event.position)
-						scene[selectedIndex].updateCurvePoints(eval)
+						scene[selectedIndex].updateCurvePoints(num_evals)
 						update()
 		if event.button_index == BUTTON_LEFT:
 			if event.pressed:
@@ -81,7 +81,7 @@ func _input(event):
 						if event.position.distance_to(scene[selectedIndex].controlPoints[i]) < 7:
 							scene[selectedIndex].controlPoints.remove(i)
 							if len(scene[selectedIndex].controlPoints) > 0:
-								scene[selectedIndex].updateCurvePoints(eval)
+								scene[selectedIndex].updateCurvePoints(num_evals)
 							else:
 								scene.remove(selectedIndex)
 								selectedIndex -= 1
@@ -90,7 +90,7 @@ func _input(event):
 				
 	if isSelected:
 		scene[selectedIndex].controlPoints[selectedPoint] = event.position
-		scene[selectedIndex].updateCurvePoints(eval)
+		scene[selectedIndex].updateCurvePoints(num_evals)
 		update()
 
 func _draw() -> void:
