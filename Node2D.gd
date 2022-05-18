@@ -6,7 +6,7 @@ var selectedIndex := -1
 var drawPoints := true
 var drawLines := true
 var drawCurve := true
-var selectedPoint
+var selectedPointIndex
 var isSelected := false
 
 
@@ -57,39 +57,55 @@ func _on_viewCurve_pressed():
 	drawCurve = !drawCurve
 	update()
 
+func getSelectedPointIndex(mousePosition: Vector2) -> int:
+	# TODO: use squared distance
+	for i in range(len(bezierCurves[selectedIndex].controlPoints)):
+		if mousePosition.distance_to(bezierCurves[selectedIndex].controlPoints[i]) < 7:
+			return i
+	return -1
+
+func isCurveEdition(event: InputEvent) -> bool:
+	return (event is InputEventMouseButton
+		and event.pressed
+		and event.position[0] > 115
+		and selectedIndex >= 0)
+
+func isAddControlPoint(event: InputEvent) -> bool:
+	return isCurveEdition(event) and event.button_index == BUTTON_RIGHT
+
+func isToggleDragPoint(event: InputEvent) -> bool:
+	return isCurveEdition(event) and event.button_index == BUTTON_LEFT
+
+func isDeletePoint(event: InputEvent) -> bool:
+	return isCurveEdition(event) and event.button_index == BUTTON_MIDDLE
+
+# TODO: always do curve = bezierCurves[selectedIndex]
 func _input(event):
-	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_RIGHT:
-			if event.pressed:
-				if selectedIndex > - 1:
-					if event.position[0] > 115:
-						bezierCurves[selectedIndex].controlPoints.append(event.position)
-						bezierCurves[selectedIndex].updateCurvePoints(num_evals)
-						update()
-		if event.button_index == BUTTON_LEFT:
-			if event.pressed:
-				if selectedIndex > -1:
-					for i in range(len(bezierCurves[selectedIndex].controlPoints)):
-						if event.position.distance_to(bezierCurves[selectedIndex].controlPoints[i]) < 7:
-							isSelected = !isSelected
-							selectedPoint = i
-							break
-		if event.button_index == BUTTON_MIDDLE:
-			if event.pressed:
-				if selectedIndex > -1:
-					for i in range(len(bezierCurves[selectedIndex].controlPoints)):
-						if event.position.distance_to(bezierCurves[selectedIndex].controlPoints[i]) < 7:
-							bezierCurves[selectedIndex].controlPoints.remove(i)
-							if len(bezierCurves[selectedIndex].controlPoints) > 0:
-								bezierCurves[selectedIndex].updateCurvePoints(num_evals)
-							else:
-								bezierCurves.remove(selectedIndex)
-								selectedIndex -= 1
-							update()
-							break
-				
+
+	if isAddControlPoint(event):
+		bezierCurves[selectedIndex].controlPoints.append(event.position)
+		bezierCurves[selectedIndex].updateCurvePoints(num_evals)
+		update()
+	
+	elif isToggleDragPoint(event):
+		selectedPointIndex = getSelectedPointIndex(event.position)
+		if selectedPointIndex != -1:
+			isSelected = !isSelected
+	
+	elif isDeletePoint(event):
+		for i in range(len(bezierCurves[selectedIndex].controlPoints)):
+			if event.position.distance_to(bezierCurves[selectedIndex].controlPoints[i]) < 7:
+				bezierCurves[selectedIndex].controlPoints.remove(i)
+				if len(bezierCurves[selectedIndex].controlPoints) > 0:
+					bezierCurves[selectedIndex].updateCurvePoints(num_evals)
+				else:
+					bezierCurves.remove(selectedIndex)
+					selectedIndex -= 1
+				update()
+				break
+
 	if isSelected:
-		bezierCurves[selectedIndex].controlPoints[selectedPoint] = event.position
+		bezierCurves[selectedIndex].controlPoints[selectedPointIndex] = event.position
 		bezierCurves[selectedIndex].updateCurvePoints(num_evals)
 		update()
 
