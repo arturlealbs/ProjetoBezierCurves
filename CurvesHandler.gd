@@ -35,7 +35,7 @@ var isDraggingPoint := false
 func _on_addButton_pressed():
 	print("Adicionou")
 	bezierCurves.append(BezierCurve.new())
-	selectedCurveIndex += 1
+	selectedCurveIndex = len(bezierCurves) - 1
 	update()
 
 func _on_delButton_pressed():
