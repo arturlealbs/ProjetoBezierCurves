@@ -65,9 +65,11 @@ func getSelectedPointIndex(mousePosition: Vector2) -> int:
 	var allowedDistanceSquared := allowedDistance*allowedDistance
 
 	var selectedCurve: BezierCurve = bezierCurves[selectedCurveIndex]
-	for i in range(len(selectedCurve.controlPoints)):
-		if mousePosition.distance_squared_to(selectedCurve.controlPoints[i]) <= allowedDistanceSquared:
+	var i := 0
+	for controlPoint in selectedCurve.controlPoints:
+		if mousePosition.distance_squared_to(controlPoint) <= allowedDistanceSquared:
 			return i
+		i += 1
 	return -1
 
 func isCurveEdition(event: InputEvent) -> bool:
