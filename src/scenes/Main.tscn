@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://CurvesHandler.gd" type="Script" id=1]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.533333, 0.690196, 0.698039, 1 )
 
 [node name="Main" type="HSplitContainer"]
 margin_right = 1024.0
@@ -16,6 +19,7 @@ margin_bottom = 600.0
 [node name="Panel" type="Panel" parent="GUI"]
 margin_right = 115.0
 margin_bottom = 600.0
+custom_styles/panel = SubResource( 1 )
 
 [node name="addButton" type="Button" parent="GUI/Panel"]
 margin_left = 4.0

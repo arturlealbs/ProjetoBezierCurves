@@ -168,13 +168,13 @@ func drawCurveAsSelected(curve: BezierCurve) -> void:
 
 func drawCurveAsNotSelected(curve: BezierCurve) -> void:
 	if drawLines:
-		curve.drawLinesOf(curve, Color(0.35, 0.35, 0.35, 1), 1, false)
+		drawLinesOf(curve, Color(0.35, 0.35, 0.35, 1), 1, false)
 
 	if drawCurve:
-		curve.drawCurveOf(curve, Color(0.35, 0.35, 0.35, 1), 2, false)
+		drawCurveOf(curve, Color(0.35, 0.35, 0.35, 1), 2, false)
 
 	if drawPoints:
-		curve.drawControlPointsOf(curve, 5, Color(0.35, 0.35, 0.35, 1))
+		drawControlPointsOf(curve, 5, Color(0.35, 0.35, 0.35, 1))
 
 func _draw() -> void:
 	for bezierCurve in bezierCurves:
