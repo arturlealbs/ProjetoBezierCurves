@@ -13,10 +13,9 @@ class ControlPoints:
 	var points = []
 	var isSelected := true
 	var bezierCurve := []
-	
-func interpolate(p0, p1, te):
-	return(Vector2((1-te)*p0[0] + te*p1[0],
-		(1-te)*p0[1] + te*p1[1]))
+
+func linearInterpolate(A: Vector2, B: Vector2, t: float) -> Vector2:
+	return (1-t)*A + t*B
 
 func bezierEquation(controlPoints, evaluation):
 	var t = 0
@@ -26,7 +25,7 @@ func bezierEquation(controlPoints, evaluation):
 		while(len(aux) > 1):
 			var temp = []
 			for i in range(0, len(aux) - 1):
-				temp.append(interpolate(aux[i], aux[i+1], t))
+				temp.append(linearInterpolate(aux[i], aux[i+1], t))
 			aux = temp
 		t += float(1)/evaluation
 		bezierCurve.append(aux[0])
@@ -112,7 +111,7 @@ func _input(event):
 	if isSelected:
 		scene[selectedIndex].points[selectedPoint] = event.position
 		scene[selectedIndex].bezierCurve = bezierEquation(scene[selectedIndex],eval)
-		update()	
+		update()
 
 func _draw() -> void:
 	for polygon in scene:
