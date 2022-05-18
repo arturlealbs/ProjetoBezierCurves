@@ -7,7 +7,7 @@ var drawPoints := true
 var drawLines := true
 var drawCurve := true
 var selectedPointIndex
-var isSelected := false
+var isDraggingPoint := false
 
 
 func _on_addButton_pressed():
@@ -98,23 +98,21 @@ func _input(event):
 	elif isToggleDragPoint(event):
 		selectedPointIndex = getSelectedPointIndex(event.position)
 		if selectedPointIndex != -1:
-			isSelected = !isSelected
+			isDraggingPoint = !isDraggingPoint
 	
 	elif isDeletePoint(event):
 		var selectedCurve: BezierCurve = bezierCurves[selectedCurveIndex]
-		for i in range(len(selectedCurve.controlPoints)):
-			if event.position.distance_to(selectedCurve.controlPoints[i]) < 7:
-				selectedCurve.controlPoints.remove(i)
-				if len(selectedCurve.controlPoints) > 0:
-					selectedCurve.updateCurvePoints(num_evals)
-				else:
-					bezierCurves.remove(selectedCurveIndex)
-					selectedCurveIndex -= 1
-					selectedCurve = bezierCurves[selectedCurveIndex]
-				update()
-				break
+		var i = getSelectedPointIndex(event.position)
+		if i != -1:
+			selectedCurve.controlPoints.remove(i)
+			if len(selectedCurve.controlPoints) > 0:
+				selectedCurve.updateCurvePoints(num_evals)
+			else:
+				bezierCurves.remove(selectedCurveIndex)
+				selectedCurveIndex = len(bezierCurves) - 1
+			update()
 
-	if isSelected:
+	if isDraggingPoint:
 		var selectedCurve: BezierCurve = bezierCurves[selectedCurveIndex]
 		selectedCurve.controlPoints[selectedPointIndex] = event.position
 		selectedCurve.updateCurvePoints(num_evals)
