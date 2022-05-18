@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Reference",
+"class": "BezierCurve",
+"language": "GDScript",
+"path": "res://src/global/BezierCurve.gd"
+} ]
+_global_script_class_icons={
+"BezierCurve": ""
+}
+
 [application]
 
 config/name="BezierCurves - PG"
