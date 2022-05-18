@@ -17,19 +17,20 @@ class BezierCurve:
 func linearInterpolate(A: Vector2, B: Vector2, t: float) -> Vector2:
 	return (1-t)*A + t*B
 
+func getBezierCurvePoint(bezierCurve: BezierCurve, t: float) -> Vector2:
+	var aux: Array = bezierCurve.controlPoints.duplicate(true)
+	for i in range(len(aux) - 1):
+		for j in range(len(aux) - 1 - i):
+			aux[j] = linearInterpolate(aux[j], aux[j+1], t)
+	return aux[0]
+
 func getBezierCurvePoints(bezierCurve: BezierCurve, num_evals: int) -> PoolVector2Array:
 	var t := 0.0
 	var curve := PoolVector2Array()
-	for _j in range(num_evals+1):
-		var aux : Array = bezierCurve.controlPoints
-		while(len(aux) > 1):
-			var temp := []
-			for i in range(0, len(aux) - 1):
-				temp.append(linearInterpolate(aux[i], aux[i+1], t))
-			aux = temp
-		t += float(1)/num_evals
-		curve.append(aux[0])
-	return(curve)
+	for _i in range(num_evals):
+		curve.append(getBezierCurvePoint(bezierCurve, t))
+		t += float(1)/(num_evals-1)
+	return curve
 
 func _on_addButton_pressed():
 	print("Adicionou")
