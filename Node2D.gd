@@ -10,24 +10,24 @@ var selectedPoint
 var isSelected := false
 
 class ControlPoints:
-	var points = []
+	var points := []
 	var isSelected := true
 	var bezierCurve := []
 
 func linearInterpolate(A: Vector2, B: Vector2, t: float) -> Vector2:
 	return (1-t)*A + t*B
 
-func bezierEquation(controlPoints, evaluation):
-	var t = 0
-	var bezierCurve = []
-	for _j in range(evaluation+1):
-		var aux = controlPoints.points
+func getBezierCurvePoints(controlPoints: ControlPoints, num_evals: int) -> PoolVector2Array:
+	var t := 0.0
+	var bezierCurve := PoolVector2Array()
+	for _j in range(num_evals+1):
+		var aux : Array = controlPoints.points
 		while(len(aux) > 1):
-			var temp = []
+			var temp := []
 			for i in range(0, len(aux) - 1):
 				temp.append(linearInterpolate(aux[i], aux[i+1], t))
 			aux = temp
-		t += float(1)/evaluation
+		t += float(1)/num_evals
 		bezierCurve.append(aux[0])
 	return(bezierCurve)
 
@@ -62,7 +62,7 @@ func _on_nextButton_pressed():
 func _on_evalButton_value_changed(value):
 	eval = value
 	if selectedIndex >= 0:
-		scene[selectedIndex].bezierCurve = bezierEquation(scene[selectedIndex],eval)
+		scene[selectedIndex].bezierCurve = getBezierCurvePoints(scene[selectedIndex],eval)
 	update()
 
 func _on_viewPoints_pressed():
@@ -84,7 +84,7 @@ func _input(event):
 				if selectedIndex > - 1:
 					if event.position[0] > 115:
 						scene[selectedIndex].points.append(event.position)
-						scene[selectedIndex].bezierCurve = bezierEquation(scene[selectedIndex],eval)
+						scene[selectedIndex].bezierCurve = getBezierCurvePoints(scene[selectedIndex],eval)
 						update()
 		if event.button_index == BUTTON_LEFT:
 			if event.pressed:
@@ -101,7 +101,7 @@ func _input(event):
 						if event.position.distance_to(scene[selectedIndex].points[i]) < 7:
 							scene[selectedIndex].points.remove(i)
 							if len(scene[selectedIndex].points) > 0:
-								scene[selectedIndex].bezierCurve = bezierEquation(scene[selectedIndex],eval)
+								scene[selectedIndex].bezierCurve = getBezierCurvePoints(scene[selectedIndex],eval)
 							else:
 								scene.remove(selectedIndex)
 								selectedIndex -= 1
@@ -110,7 +110,7 @@ func _input(event):
 				
 	if isSelected:
 		scene[selectedIndex].points[selectedPoint] = event.position
-		scene[selectedIndex].bezierCurve = bezierEquation(scene[selectedIndex],eval)
+		scene[selectedIndex].bezierCurve = getBezierCurvePoints(scene[selectedIndex],eval)
 		update()
 
 func _draw() -> void:
