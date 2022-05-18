@@ -1,5 +1,7 @@
 extends Node2D
 
+export(bool) var antialiased := true
+
 export(Color) var pointColorOfSelectedCurve := Color(1,0,0)
 export(int) var pointRadiusOfSelectedCurve := 5
 
@@ -156,10 +158,10 @@ func drawControlPointsOf(curve: BezierCurve, radius: float, color: Color) -> voi
 
 func drawCurveAsSelected(curve: BezierCurve) -> void:
 	if drawLines:
-		drawLinesOf(curve, lineColorOfSelectedCurve, lineWidthOfSelectedCurve, false)
+		drawLinesOf(curve, lineColorOfSelectedCurve, lineWidthOfSelectedCurve, self.antialiased)
 
 	if drawCurve:
-		drawCurveOf(curve, curveColorOfSelectedCurve, curveWidthOfSelectedCurve, false)
+		drawCurveOf(curve, curveColorOfSelectedCurve, curveWidthOfSelectedCurve, self.antialiased)
 
 	if drawPoints:
 		drawControlPointsOf(curve, pointRadiusOfSelectedCurve, pointColorOfSelectedCurve)
