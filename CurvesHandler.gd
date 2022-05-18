@@ -118,32 +118,41 @@ func _input(event):
 		selectedCurve.updateCurvePoints(num_evals)
 		update()
 
+
+func drawLinesOf(curve: BezierCurve, color: Color, width: float, antialiased: bool) -> void:
+	if len(curve.controlPoints) > 1:
+		for i in range (len(curve.controlPoints) - 1):
+			draw_line(curve.controlPoints[i], curve.controlPoints[i + 1], color, width, antialiased)
+
+func drawCurveOf(curve: BezierCurve, color: Color, width: float, antialiased: bool) -> void:
+	if len(curve.controlPoints) > 1:
+		for i in range(len(curve.curvePoints) - 1):
+			draw_line(curve.curvePoints[i], curve.curvePoints[i + 1], color, width, antialiased)
+
+func drawControlPointsOf(curve: BezierCurve, radius: float, color: Color) -> void:
+	for point in curve.controlPoints:
+		draw_circle(point, radius, color)
+
+
 func drawCurveAsSelected(curve: BezierCurve) -> void:
-	## TODO: change draw order
 	if drawLines:
-		if len(curve.controlPoints) > 1:
-			for i in range (len(curve.controlPoints) - 1):
-				draw_line(curve.controlPoints[i], curve.controlPoints[i + 1], Color(1,0,0),1)
+		drawLinesOf(curve, Color(1,0,0), 1, false)
+
 	if drawCurve:
-		if len(curve.controlPoints) > 1:	
-			for i in range(len(curve.curvePoints) - 1):
-				draw_line(curve.curvePoints[i], curve.curvePoints[i + 1], Color(0,1,0), 2)
+		drawCurveOf(curve, Color(0,1,0), 2, false)
+
 	if drawPoints:
-		for point in curve.controlPoints:
-			draw_circle(point, 5, Color(1,0,0))
+		drawControlPointsOf(curve, 5, Color(1,0,0))
 
 func drawCurveAsNotSelected(curve: BezierCurve) -> void:
 	if drawLines:
-		if len(curve.controlPoints) > 1:
-			for i in range (len(curve.controlPoints) - 1):
-				draw_line(curve.controlPoints[i], curve.controlPoints[i + 1], Color(0.35, 0.35, 0.35, 1), 1)
+		curve.drawLinesOf(curve, Color(0.35, 0.35, 0.35, 1), 1, false)
+
 	if drawCurve:
-		if len(curve.controlPoints) > 1:
-			for i in range(len(curve.curvePoints) - 1):
-				draw_line(curve.curvePoints[i], curve.curvePoints[i + 1], Color(0.35,0.35,0.35,1), 2)
+		curve.drawCurveOf(curve, Color(0.35,0.35,0.35,1), 2, false)
+
 	if drawPoints:
-		for point in curve.controlPoints:
-			draw_circle(point, 5, Color(0.35, 0.35, 0.35, 1))
+		curve.drawControlPointsOf(curve, 5, Color(0.35, 0.35, 0.35, 1))
 
 func _draw() -> void:
 	for bezierCurve in bezierCurves:
