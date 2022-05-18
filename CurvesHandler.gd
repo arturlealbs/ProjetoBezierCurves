@@ -120,6 +120,10 @@ func _input(event):
 
 func drawCurveAsSelected(curve: BezierCurve) -> void:
 	## TODO: change draw order
+	if drawLines:
+		if len(curve.controlPoints) > 1:
+			for i in range (len(curve.controlPoints) - 1):
+				draw_line(curve.controlPoints[i], curve.controlPoints[i + 1], Color(1,0,0),1)
 	if drawCurve:
 		if len(curve.controlPoints) > 1:	
 			for i in range(len(curve.curvePoints) - 1):
@@ -127,12 +131,12 @@ func drawCurveAsSelected(curve: BezierCurve) -> void:
 	if drawPoints:
 		for point in curve.controlPoints:
 			draw_circle(point, 5, Color(1,0,0))
+
+func drawCurveAsNotSelected(curve: BezierCurve) -> void:
 	if drawLines:
 		if len(curve.controlPoints) > 1:
 			for i in range (len(curve.controlPoints) - 1):
-				draw_line(curve.controlPoints[i], curve.controlPoints[i + 1], Color(1,0,0),1)
-
-func drawCurveAsNotSelected(curve: BezierCurve) -> void:
+				draw_line(curve.controlPoints[i], curve.controlPoints[i + 1], Color(0.35, 0.35, 0.35, 1), 1)
 	if drawCurve:
 		if len(curve.controlPoints) > 1:
 			for i in range(len(curve.curvePoints) - 1):
@@ -140,10 +144,6 @@ func drawCurveAsNotSelected(curve: BezierCurve) -> void:
 	if drawPoints:
 		for point in curve.controlPoints:
 			draw_circle(point, 5, Color(0.35, 0.35, 0.35, 1))
-	if drawLines:
-		if len(curve.controlPoints) > 1:
-			for i in range (len(curve.controlPoints) - 1):
-				draw_line(curve.controlPoints[i], curve.controlPoints[i + 1], Color(0.35, 0.35, 0.35, 1), 1)
 
 func _draw() -> void:
 	for bezierCurve in bezierCurves:
