@@ -61,9 +61,12 @@ func _on_viewCurve_pressed():
 func getSelectedPointIndex(mousePosition: Vector2) -> int:
 	# TODO: use squared distance
 	# TODO: use for controlPoint in selectedCurve.controlPoints
+	var allowedDistance := 7.0
+	var allowedDistanceSquared := allowedDistance*allowedDistance
+
 	var selectedCurve: BezierCurve = bezierCurves[selectedCurveIndex]
 	for i in range(len(selectedCurve.controlPoints)):
-		if mousePosition.distance_to(selectedCurve.controlPoints[i]) < 7:
+		if mousePosition.distance_squared_to(selectedCurve.controlPoints[i]) <= allowedDistanceSquared:
 			return i
 	return -1
 
