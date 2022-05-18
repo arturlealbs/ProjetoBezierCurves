@@ -13,13 +13,14 @@ var isSelected := false
 func _on_addButton_pressed():
 	print("Adicionou")
 	scene.append(BezierCurve.new())
-	selectedIndex = len(scene) - 1
+	selectedIndex += 1
 	update()
 
 func _on_delButton_pressed():
 	print("Deletou")
-	scene.pop_at(selectedIndex)
-	selectedIndex -= 1
+	if(selectedIndex != -1):
+		scene.pop_at(selectedIndex)
+		selectedIndex = len(scene) - 1
 	update()
 
 func _on_prevButton_pressed():
