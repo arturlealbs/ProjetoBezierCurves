@@ -21,7 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="BezierCurves - PG"
-run/main_scene="res://src/scenes/Main.tscn"
+run/main_scene="res://src/scenes/Main/Main.tscn"
 run/delta_sync_after_draw=true
 config/icon="res://icon.png"
 

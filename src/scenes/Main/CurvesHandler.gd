@@ -32,54 +32,6 @@ var drawCurve := true
 var isDraggingPoint := false
 
 
-func _on_addButton_pressed():
-	print("Adicionou")
-	bezierCurves.append(BezierCurve.new())
-	selectedCurveIndex = len(bezierCurves) - 1
-	update()
-
-func _on_delButton_pressed():
-	print("Deletou")
-	if(selectedCurveIndex != -1):
-		bezierCurves.pop_at(selectedCurveIndex)
-		selectedCurveIndex = len(bezierCurves) - 1
-	update()
-
-func _on_prevButton_pressed():
-	print("voltou")
-	if selectedCurveIndex == 0:
-		selectedCurveIndex = len(bezierCurves) - 1
-	else:
-		selectedCurveIndex -= 1
-	update()
-
-func _on_nextButton_pressed():
-	print("avancou")
-	if selectedCurveIndex == len(bezierCurves) - 1:
-		selectedCurveIndex = 0
-	else:
-		selectedCurveIndex += 1
-	update()
-
-func _on_evalButton_value_changed(value):
-	num_evals = value
-	if selectedCurveIndex >= 0:
-		var selectedCurve: BezierCurve = bezierCurves[selectedCurveIndex]
-		selectedCurve.updateCurvePoints(num_evals)
-	update()
-
-func _on_viewPoints_pressed():
-	drawPoints = !drawPoints
-	update()
-
-func _on_viewPolygon_pressed():
-	drawLines = !drawLines
-	update()
-
-func _on_viewCurve_pressed():
-	drawCurve = !drawCurve
-	update()
-
 func getSelectedPointIndex(mousePosition: Vector2) -> int:
 	# TODO: use squared distance
 	# TODO: use for controlPoint in selectedCurve.controlPoints
