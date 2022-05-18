@@ -1,12 +1,32 @@
 extends Node2D
 
+export(Color) var pointColorOfSelectedCurve := Color(1,0,0)
+export(int) var pointRadiusOfSelectedCurve := 5
+
+export(Color) var lineColorOfSelectedCurve  := Color(1,0,0)
+export(int) var lineWidthOfSelectedCurve := 1
+
+export(Color) var curveColorOfSelectedCurve := Color(0,1,0)
+export(int) var curveWidthOfSelectedCurve := 2
+
+
+export(Color) var pointColorOfUnselectedCurve := Color(0.35, 0.35, 0.35, 1)
+export(int) var pointRadiusOfUnselectedCurve := 5
+
+export(Color) var lineColorOfUnselectedCurve  := Color(0.35, 0.35, 0.35, 1)
+export(int) var lineWidthOfUnselectedCurve := 1
+
+export(Color) var curveColorOfUnselectedCurve := Color(0.35, 0.35, 0.35, 1)
+export(int) var curveWidthOfUnselectedCurve := 2
+
+
 var num_evals := 2
 var bezierCurves := [] # array of BezierCurve
 var selectedCurveIndex := -1
+var selectedPointIndex
 var drawPoints := true
 var drawLines := true
 var drawCurve := true
-var selectedPointIndex
 var isDraggingPoint := false
 
 
@@ -136,20 +156,20 @@ func drawControlPointsOf(curve: BezierCurve, radius: float, color: Color) -> voi
 
 func drawCurveAsSelected(curve: BezierCurve) -> void:
 	if drawLines:
-		drawLinesOf(curve, Color(1,0,0), 1, false)
+		drawLinesOf(curve, lineColorOfSelectedCurve, lineWidthOfSelectedCurve, false)
 
 	if drawCurve:
-		drawCurveOf(curve, Color(0,1,0), 2, false)
+		drawCurveOf(curve, curveColorOfSelectedCurve, curveWidthOfSelectedCurve, false)
 
 	if drawPoints:
-		drawControlPointsOf(curve, 5, Color(1,0,0))
+		drawControlPointsOf(curve, pointRadiusOfSelectedCurve, pointColorOfSelectedCurve)
 
 func drawCurveAsNotSelected(curve: BezierCurve) -> void:
 	if drawLines:
 		curve.drawLinesOf(curve, Color(0.35, 0.35, 0.35, 1), 1, false)
 
 	if drawCurve:
-		curve.drawCurveOf(curve, Color(0.35,0.35,0.35,1), 2, false)
+		curve.drawCurveOf(curve, Color(0.35, 0.35, 0.35, 1), 2, false)
 
 	if drawPoints:
 		curve.drawControlPointsOf(curve, 5, Color(0.35, 0.35, 0.35, 1))
