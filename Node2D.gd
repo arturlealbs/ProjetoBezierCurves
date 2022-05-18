@@ -1,7 +1,7 @@
 extends Node2D
 
 var num_evals := 2
-var scene := []
+var bezierCurves := []
 var selectedIndex := -1
 var drawPoints := true
 var drawLines := true
@@ -12,28 +12,28 @@ var isSelected := false
 
 func _on_addButton_pressed():
 	print("Adicionou")
-	scene.append(BezierCurve.new())
+	bezierCurves.append(BezierCurve.new())
 	selectedIndex += 1
 	update()
 
 func _on_delButton_pressed():
 	print("Deletou")
 	if(selectedIndex != -1):
-		scene.pop_at(selectedIndex)
-		selectedIndex = len(scene) - 1
+		bezierCurves.pop_at(selectedIndex)
+		selectedIndex = len(bezierCurves) - 1
 	update()
 
 func _on_prevButton_pressed():
 	print("voltou")
 	if selectedIndex == 0:
-		selectedIndex = len(scene) - 1
+		selectedIndex = len(bezierCurves) - 1
 	else:
 		selectedIndex -= 1
 	update()
 
 func _on_nextButton_pressed():
 	print("avancou")
-	if selectedIndex == len(scene) - 1:
+	if selectedIndex == len(bezierCurves) - 1:
 		selectedIndex = 0
 	else:
 		selectedIndex += 1
@@ -42,7 +42,7 @@ func _on_nextButton_pressed():
 func _on_evalButton_value_changed(value):
 	num_evals = value
 	if selectedIndex >= 0:
-		scene[selectedIndex].updateCurvePoints(num_evals)
+		bezierCurves[selectedIndex].updateCurvePoints(num_evals)
 	update()
 
 func _on_viewPoints_pressed():
@@ -63,39 +63,39 @@ func _input(event):
 			if event.pressed:
 				if selectedIndex > - 1:
 					if event.position[0] > 115:
-						scene[selectedIndex].controlPoints.append(event.position)
-						scene[selectedIndex].updateCurvePoints(num_evals)
+						bezierCurves[selectedIndex].controlPoints.append(event.position)
+						bezierCurves[selectedIndex].updateCurvePoints(num_evals)
 						update()
 		if event.button_index == BUTTON_LEFT:
 			if event.pressed:
 				if selectedIndex > -1:
-					for i in range(len(scene[selectedIndex].controlPoints)):
-						if event.position.distance_to(scene[selectedIndex].controlPoints[i]) < 7:
+					for i in range(len(bezierCurves[selectedIndex].controlPoints)):
+						if event.position.distance_to(bezierCurves[selectedIndex].controlPoints[i]) < 7:
 							isSelected = !isSelected
 							selectedPoint = i
 							break
 		if event.button_index == BUTTON_MIDDLE:
 			if event.pressed:
 				if selectedIndex > -1:
-					for i in range(len(scene[selectedIndex].controlPoints)):
-						if event.position.distance_to(scene[selectedIndex].controlPoints[i]) < 7:
-							scene[selectedIndex].controlPoints.remove(i)
-							if len(scene[selectedIndex].controlPoints) > 0:
-								scene[selectedIndex].updateCurvePoints(num_evals)
+					for i in range(len(bezierCurves[selectedIndex].controlPoints)):
+						if event.position.distance_to(bezierCurves[selectedIndex].controlPoints[i]) < 7:
+							bezierCurves[selectedIndex].controlPoints.remove(i)
+							if len(bezierCurves[selectedIndex].controlPoints) > 0:
+								bezierCurves[selectedIndex].updateCurvePoints(num_evals)
 							else:
-								scene.remove(selectedIndex)
+								bezierCurves.remove(selectedIndex)
 								selectedIndex -= 1
 							update()
 							break
 				
 	if isSelected:
-		scene[selectedIndex].controlPoints[selectedPoint] = event.position
-		scene[selectedIndex].updateCurvePoints(num_evals)
+		bezierCurves[selectedIndex].controlPoints[selectedPoint] = event.position
+		bezierCurves[selectedIndex].updateCurvePoints(num_evals)
 		update()
 
 func _draw() -> void:
-	for polygon in scene:
-		if scene[selectedIndex] == polygon:
+	for polygon in bezierCurves:
+		if bezierCurves[selectedIndex] == polygon:
 			if drawCurve:
 				if len(polygon.controlPoints) > 1:	
 					for point in range(len(polygon.curvePoints) - 1):
