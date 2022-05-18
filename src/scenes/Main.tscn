@@ -2,22 +2,22 @@
 
 [ext_resource path="res://Node2D.gd" type="Script" id=1]
 
-[node name="HSplitContainer" type="HSplitContainer"]
+[node name="Main" type="HSplitContainer"]
 margin_right = 1024.0
 margin_bottom = 600.0
 
 [node name="CurvesHandler" type="Node2D" parent="."]
 script = ExtResource( 1 )
 
-[node name="Control" type="Control" parent="."]
+[node name="GUI" type="Control" parent="."]
 margin_right = 1024.0
 margin_bottom = 600.0
 
-[node name="Panel" type="Panel" parent="Control"]
+[node name="Panel" type="Panel" parent="GUI"]
 margin_right = 115.0
 margin_bottom = 600.0
 
-[node name="addButton" type="Button" parent="Control/Panel"]
+[node name="addButton" type="Button" parent="GUI/Panel"]
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 56.0
@@ -31,7 +31,7 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="delButton" type="Button" parent="Control/Panel"]
+[node name="delButton" type="Button" parent="GUI/Panel"]
 margin_left = 59.0
 margin_top = 4.0
 margin_right = 111.0
@@ -41,7 +41,7 @@ hint_tooltip = "Adicionar nova curva"
 keep_pressed_outside = true
 text = "x"
 
-[node name="prevButton" type="Button" parent="Control/Panel"]
+[node name="prevButton" type="Button" parent="GUI/Panel"]
 margin_left = 4.0
 margin_top = 59.0
 margin_right = 56.0
@@ -51,7 +51,7 @@ hint_tooltip = "Adicionar nova curva"
 keep_pressed_outside = true
 text = "<"
 
-[node name="nextButton" type="Button" parent="Control/Panel"]
+[node name="nextButton" type="Button" parent="GUI/Panel"]
 margin_left = 59.0
 margin_top = 59.0
 margin_right = 111.0
@@ -61,7 +61,7 @@ hint_tooltip = "Adicionar nova curva"
 keep_pressed_outside = true
 text = ">"
 
-[node name="evalButton" type="SpinBox" parent="Control/Panel"]
+[node name="evalButton" type="SpinBox" parent="GUI/Panel"]
 margin_left = 5.0
 margin_top = 114.0
 margin_right = 111.0
@@ -72,7 +72,7 @@ value = 2.0
 rounded = true
 allow_greater = true
 
-[node name="viewPoints" type="CheckBox" parent="Control/Panel"]
+[node name="viewPoints" type="CheckBox" parent="GUI/Panel"]
 margin_left = 5.0
 margin_top = 175.0
 margin_right = 73.0
@@ -80,7 +80,7 @@ margin_bottom = 199.0
 pressed = true
 text = "Points"
 
-[node name="viewPolygon" type="CheckBox" parent="Control/Panel"]
+[node name="viewPolygon" type="CheckBox" parent="GUI/Panel"]
 margin_left = 5.0
 margin_top = 192.0
 margin_right = 98.0
@@ -88,7 +88,7 @@ margin_bottom = 216.0
 pressed = true
 text = "Poligonals"
 
-[node name="viewCurve" type="CheckBox" parent="Control/Panel"]
+[node name="viewCurve" type="CheckBox" parent="GUI/Panel"]
 margin_left = 5.0
 margin_top = 209.0
 margin_right = 76.0
@@ -96,11 +96,11 @@ margin_bottom = 233.0
 pressed = true
 text = "Curves"
 
-[connection signal="pressed" from="Control/Panel/addButton" to="CurvesHandler" method="_on_addButton_pressed"]
-[connection signal="pressed" from="Control/Panel/delButton" to="CurvesHandler" method="_on_delButton_pressed"]
-[connection signal="pressed" from="Control/Panel/prevButton" to="CurvesHandler" method="_on_prevButton_pressed"]
-[connection signal="pressed" from="Control/Panel/nextButton" to="CurvesHandler" method="_on_nextButton_pressed"]
-[connection signal="value_changed" from="Control/Panel/evalButton" to="CurvesHandler" method="_on_evalButton_value_changed"]
-[connection signal="pressed" from="Control/Panel/viewPoints" to="CurvesHandler" method="_on_viewPoints_pressed"]
-[connection signal="pressed" from="Control/Panel/viewPolygon" to="CurvesHandler" method="_on_viewPolygon_pressed"]
-[connection signal="pressed" from="Control/Panel/viewCurve" to="CurvesHandler" method="_on_viewCurve_pressed"]
+[connection signal="pressed" from="GUI/Panel/addButton" to="CurvesHandler" method="_on_addButton_pressed"]
+[connection signal="pressed" from="GUI/Panel/delButton" to="CurvesHandler" method="_on_delButton_pressed"]
+[connection signal="pressed" from="GUI/Panel/prevButton" to="CurvesHandler" method="_on_prevButton_pressed"]
+[connection signal="pressed" from="GUI/Panel/nextButton" to="CurvesHandler" method="_on_nextButton_pressed"]
+[connection signal="value_changed" from="GUI/Panel/evalButton" to="CurvesHandler" method="_on_evalButton_value_changed"]
+[connection signal="pressed" from="GUI/Panel/viewPoints" to="CurvesHandler" method="_on_viewPoints_pressed"]
+[connection signal="pressed" from="GUI/Panel/viewPolygon" to="CurvesHandler" method="_on_viewPolygon_pressed"]
+[connection signal="pressed" from="GUI/Panel/viewCurve" to="CurvesHandler" method="_on_viewCurve_pressed"]
