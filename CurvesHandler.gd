@@ -1,7 +1,7 @@
 extends Node2D
 
 var num_evals := 2
-var bezierCurves := []
+var bezierCurves := [] # array of BezierCurve
 var selectedCurveIndex := -1
 var drawPoints := true
 var drawLines := true
