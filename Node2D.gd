@@ -1,6 +1,6 @@
 extends Node2D
 
-var eval := 1
+var eval := 2
 var scene := []
 var selectedIndex := -1
 var drawPoints := true
