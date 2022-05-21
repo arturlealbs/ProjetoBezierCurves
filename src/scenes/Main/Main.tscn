@@ -54,7 +54,8 @@ custom_styles/panel = ExtResource( 20 )
 [node name="addButton" type="Button" parent="GUI/CurveManagerPanel"]
 anchor_left = 0.046875
 anchor_right = 0.046875
-margin_left = -6.0
+margin_left = -3.0
+margin_top = 3.0
 margin_right = 58.0
 margin_bottom = 64.0
 rect_pivot_offset = Vector2( -272, -16 )
@@ -69,7 +70,8 @@ script = ExtResource( 3 )
 
 [node name="delButton" type="Button" parent="GUI/CurveManagerPanel"]
 margin_left = 64.0
-margin_right = 128.0
+margin_top = 3.0
+margin_right = 125.0
 margin_bottom = 64.0
 rect_pivot_offset = Vector2( 63, 61 )
 hint_tooltip = "Deletar Curva Selecionada"
@@ -81,6 +83,7 @@ text = "x"
 script = ExtResource( 2 )
 
 [node name="prevButton" type="Button" parent="GUI/CurveManagerPanel"]
+margin_left = 2.0
 margin_top = 64.0
 margin_right = 64.0
 margin_bottom = 128.0
@@ -96,7 +99,7 @@ script = ExtResource( 5 )
 [node name="nextButton" type="Button" parent="GUI/CurveManagerPanel"]
 margin_left = 64.0
 margin_top = 64.0
-margin_right = 128.0
+margin_right = 125.0
 margin_bottom = 128.0
 rect_pivot_offset = Vector2( 44, 13 )
 hint_tooltip = "Selecionar Próxima Curva"
@@ -108,10 +111,10 @@ text = ">"
 script = ExtResource( 6 )
 
 [node name="evalButton" type="SpinBox" parent="GUI/CurveManagerPanel"]
-margin_left = 56.0
-margin_top = 128.0
+margin_left = 64.0
+margin_top = 133.0
 margin_right = 128.0
-margin_bottom = 160.0
+margin_bottom = 165.0
 hint_tooltip = "Seleciona a Quantidade de Avaliações"
 theme = ExtResource( 10 )
 min_value = 1.0
@@ -167,18 +170,18 @@ text = "Curvas"
 script = ExtResource( 8 )
 
 [node name="labelView" type="Label" parent="GUI/CurveManagerPanel"]
-margin_left = 8.0
+margin_left = 5.0
 margin_top = 160.0
-margin_right = 111.0
-margin_bottom = 192.0
+margin_right = 124.0
+margin_bottom = 199.0
 theme = ExtResource( 10 )
 text = "Visualizar:"
 
 [node name="labelEval" type="Label" parent="GUI/CurveManagerPanel"]
-margin_left = 8.0
+margin_left = 5.0
 margin_top = 128.0
-margin_right = 104.0
-margin_bottom = 160.0
+margin_right = 101.0
+margin_bottom = 167.0
 theme = ExtResource( 10 )
 text = "Eval:"
 
@@ -255,8 +258,9 @@ align = 2
 script = ExtResource( 16 )
 
 [node name="antilasedButton" type="CheckBox" parent="GUI/CurveEditorPanel"]
+margin_left = 3.0
 margin_top = 248.0
-margin_right = 115.0
+margin_right = 118.0
 margin_bottom = 280.0
 focus_mode = 0
 theme = ExtResource( 10 )
@@ -266,8 +270,9 @@ text = "Antialised"
 script = ExtResource( 17 )
 
 [node name="hollowPoints" type="CheckBox" parent="GUI/CurveEditorPanel"]
+margin_left = 3.0
 margin_top = 272.0
-margin_right = 128.0
+margin_right = 131.0
 margin_bottom = 304.0
 focus_mode = 0
 theme = ExtResource( 10 )
