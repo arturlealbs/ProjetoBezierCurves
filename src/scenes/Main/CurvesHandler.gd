@@ -2,27 +2,17 @@ extends Node2D
 
 export(bool) var antialiased := true
 
-export(Color) var pointColorOfSelectedCurve := Color(1,0,0)
-export(int) var pointRadiusOfSelectedCurve := 5
+export(Color) var pointColorOfSelectedCurve := Color(1,1,1)
+export(Color) var lineColorOfSelectedCurve  := Color(1,1,1)
+export(Color) var curveColorOfSelectedCurve := Color(0.98,0.26,0.54)
+export(Color) var colorOfUnselectedCurve := Color(0.35, 0.35, 0.35, 1)
+export(Color) var backgrooundColor := Color(0.04,0.031,0.098)
 
-export(Color) var lineColorOfSelectedCurve  := Color(1,0,0)
-export(int) var lineWidthOfSelectedCurve := 1
+export(int) var pointRadius := 5
+export(int) var lineWidth := 2
+export(int) var curveWidth := 4
 
-export(Color) var curveColorOfSelectedCurve := Color(0,1,0)
-export(int) var curveWidthOfSelectedCurve := 2
-
-
-export(Color) var pointColorOfUnselectedCurve := Color(0.35, 0.35, 0.35, 1)
-export(int) var pointRadiusOfUnselectedCurve := 5
-
-export(Color) var lineColorOfUnselectedCurve  := Color(0.35, 0.35, 0.35, 1)
-export(int) var lineWidthOfUnselectedCurve := 1
-
-export(Color) var curveColorOfUnselectedCurve := Color(0.35, 0.35, 0.35, 1)
-export(int) var curveWidthOfUnselectedCurve := 2
-
-
-var num_evals := 2
+var num_evals := 20
 var bezierCurves := [] # array of BezierCurve
 var selectedCurveIndex := -1
 var selectedPointIndex
@@ -73,6 +63,7 @@ func _input(event):
 		selectedPointIndex = getSelectedPointIndex(event.position)
 		if selectedPointIndex != -1:
 			isDraggingPoint = !isDraggingPoint
+		update()
 	
 	elif isDeletePoint(event):
 		var selectedCurve: BezierCurve = bezierCurves[selectedCurveIndex]
@@ -92,41 +83,45 @@ func _input(event):
 		selectedCurve.updateCurvePoints(num_evals)
 		update()
 
-
 func drawLinesOf(curve: BezierCurve, color: Color, width: float, antialiased: bool) -> void:
 	if len(curve.controlPoints) > 1:
 		for i in range (len(curve.controlPoints) - 1):
 			draw_line(curve.controlPoints[i], curve.controlPoints[i + 1], color, width, antialiased)
 
 func drawCurveOf(curve: BezierCurve, color: Color, width: float, antialiased: bool) -> void:
-	if len(curve.controlPoints) > 1:
+	if len(curve.controlPoints) > 2:
 		for i in range(len(curve.curvePoints) - 1):
 			draw_line(curve.curvePoints[i], curve.curvePoints[i + 1], color, width, antialiased)
 
 func drawControlPointsOf(curve: BezierCurve, radius: float, color: Color) -> void:
 	for point in curve.controlPoints:
-		draw_circle(point, radius, color)
-
-
+		if isDraggingPoint:
+			if point == curve.controlPoints[selectedPointIndex]:
+				draw_circle(point, radius + 2, color)
+			else:
+				draw_circle(point, radius, color)
+		else:
+			draw_circle(point, radius, color)
+			
 func drawCurveAsSelected(curve: BezierCurve) -> void:
 	if drawLines:
-		drawLinesOf(curve, lineColorOfSelectedCurve, lineWidthOfSelectedCurve, self.antialiased)
+		drawLinesOf(curve, lineColorOfSelectedCurve, lineWidth, self.antialiased)
 
 	if drawCurve:
-		drawCurveOf(curve, curveColorOfSelectedCurve, curveWidthOfSelectedCurve, self.antialiased)
+		drawCurveOf(curve, curveColorOfSelectedCurve, curveWidth, self.antialiased)
 
 	if drawPoints:
-		drawControlPointsOf(curve, pointRadiusOfSelectedCurve, pointColorOfSelectedCurve)
+		drawControlPointsOf(curve, pointRadius, pointColorOfSelectedCurve)
 
 func drawCurveAsNotSelected(curve: BezierCurve) -> void:
 	if drawLines:
-		drawLinesOf(curve, Color(0.35, 0.35, 0.35, 1), 1, false)
+		drawLinesOf(curve, colorOfUnselectedCurve, lineWidth, false)
 
 	if drawCurve:
-		drawCurveOf(curve, Color(0.35, 0.35, 0.35, 1), 2, false)
+		drawCurveOf(curve, colorOfUnselectedCurve, curveWidth, false)
 
 	if drawPoints:
-		drawControlPointsOf(curve, 5, Color(0.35, 0.35, 0.35, 1))
+		drawControlPointsOf(curve, pointRadius, colorOfUnselectedCurve)
 
 func _draw() -> void:
 	for bezierCurve in bezierCurves:
