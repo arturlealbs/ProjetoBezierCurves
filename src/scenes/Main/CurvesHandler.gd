@@ -66,6 +66,7 @@ func _input(event):
 		update()
 	
 	elif isDeletePoint(event):
+		print('hi')
 		var selectedCurve: BezierCurve = bezierCurves[selectedCurveIndex]
 		var i = getSelectedPointIndex(event.position)
 		if i != -1:
@@ -79,6 +80,10 @@ func _input(event):
 
 	if isDraggingPoint:
 		var selectedCurve: BezierCurve = bezierCurves[selectedCurveIndex]
+		print("Selected curve: ", selectedCurveIndex)
+		print("Size: ", selectedCurve.controlPoints.size())
+		print("Selected point index: ", selectedPointIndex)
+		print()
 		selectedCurve.controlPoints[selectedPointIndex] = event.position
 		selectedCurve.updateCurvePoints(num_evals)
 		update()
@@ -93,10 +98,10 @@ func drawCurveOf(curve: BezierCurve, color: Color, width: float, antialiased: bo
 		for i in range(len(curve.curvePoints) - 1):
 			draw_line(curve.curvePoints[i], curve.curvePoints[i + 1], color, width, antialiased)
 
-func drawControlPointsOf(curve: BezierCurve, radius: float, color: Color, selected: bool) -> void:
+func drawControlPointsOf(curve: BezierCurve, radius: float, color: Color, isSelectedCurve: bool) -> void:
 	for point in curve.controlPoints:
 		if isDraggingPoint:
-			if point == curve.controlPoints[selectedPointIndex] and selected:
+			if isSelectedCurve and point == curve.controlPoints[selectedPointIndex]:
 				draw_arc(point, 10, 0, TAU, 20, color,3)
 				draw_circle(point, radius + 2, backgroundColor)
 			else:

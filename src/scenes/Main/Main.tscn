@@ -10,7 +10,7 @@
 [ext_resource path="res://src/scenes/Main/vLines.gd" type="Script" id=11]
 [ext_resource path="res://src/scenes/Main/vCurves.gd" type="Script" id=12]
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0627451, 0, 0.215686, 1 )
 border_color = Color( 0, 0, 0, 1 )
 corner_radius_top_left = 5
@@ -36,7 +36,7 @@ margin_left = 8.0
 margin_top = 100.0
 margin_right = 72.0
 margin_bottom = 500.0
-custom_styles/panel = SubResource( 2 )
+custom_styles/panel = SubResource( 1 )
 
 [node name="addButton" type="Button" parent="GUI/CurveManagerPanel"]
 anchor_left = 0.210938

@@ -1,16 +1,16 @@
-[gd_resource type="Theme" load_steps=8 format=2]
+[gd_resource type="Theme" load_steps=7 format=2]
 
 [ext_resource path="res://OpenDyslexic-Regular.otf" type="DynamicFontData" id=2]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 resource_name = "Font"
 size = 31
 font_data = ExtResource( 2 )
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.0627451, 0, 0.215686, 1 )
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.439216, 0.372549, 0.615686, 0.196078 )
 corner_radius_top_left = 10
 corner_radius_top_right = 10
@@ -18,7 +18,7 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 anti_aliasing = false
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=4]
 size = 24
 extra_spacing_char = -1
 extra_spacing_space = -6
@@ -29,9 +29,9 @@ bg_color = Color( 0.0627451, 0, 0.215686, 1 )
 
 [resource]
 Button/colors/font_color = Color( 0.439216, 0.4, 0.529412, 1 )
-Button/fonts/font = SubResource( 2 )
-Button/styles/normal = SubResource( 3 )
-Button/styles/pressed = SubResource( 4 )
+Button/fonts/font = SubResource( 1 )
+Button/styles/normal = SubResource( 2 )
+Button/styles/pressed = SubResource( 3 )
 LineEdit/colors/font_color = Color( 0.439216, 0.4, 0.529412, 1 )
-LineEdit/fonts/font = SubResource( 6 )
+LineEdit/fonts/font = SubResource( 4 )
 LineEdit/styles/normal = SubResource( 5 )
