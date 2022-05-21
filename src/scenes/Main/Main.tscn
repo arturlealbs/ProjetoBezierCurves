@@ -25,7 +25,6 @@
 bg_color = Color( 0.0627451, 0, 0.215686, 1 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 17
 font_data = ExtResource( 19 )
 
 [node name="Main" type="HSplitContainer"]
@@ -191,9 +190,9 @@ custom_styles/panel = ExtResource( 20 )
 
 [node name="pointColorPicker" type="ColorPickerButton" parent="GUI/CurveEditorPanel"]
 margin_left = 120.0
-margin_top = 56.0
-margin_right = 152.0
-margin_bottom = 97.0
+margin_top = 59.0
+margin_right = 149.0
+margin_bottom = 119.0
 rect_rotation = 90.0
 theme = ExtResource( 10 )
 color = Color( 1, 1, 1, 1 )
@@ -201,9 +200,9 @@ script = ExtResource( 11 )
 
 [node name="lineColorPicker" type="ColorPickerButton" parent="GUI/CurveEditorPanel"]
 margin_left = 120.0
-margin_top = 136.0
-margin_right = 152.0
-margin_bottom = 177.0
+margin_top = 139.0
+margin_right = 149.0
+margin_bottom = 199.0
 rect_rotation = 90.0
 theme = ExtResource( 10 )
 color = Color( 1, 1, 1, 1 )
@@ -211,9 +210,9 @@ script = ExtResource( 12 )
 
 [node name="curveColorPicker" type="ColorPickerButton" parent="GUI/CurveEditorPanel"]
 margin_left = 120.0
-margin_top = 216.0
-margin_right = 152.0
-margin_bottom = 257.0
+margin_top = 219.0
+margin_right = 149.0
+margin_bottom = 279.0
 rect_rotation = 90.0
 theme = ExtResource( 10 )
 color = Color( 0.980392, 0.258824, 0.541176, 1 )
@@ -221,9 +220,9 @@ script = ExtResource( 13 )
 
 [node name="pointRadius" type="SpinBox" parent="GUI/CurveEditorPanel"]
 margin_left = 64.0
-margin_top = 24.0
+margin_top = 30.0
 margin_right = 124.0
-margin_bottom = 56.0
+margin_bottom = 59.0
 theme = ExtResource( 10 )
 min_value = 1.0
 value = 5.0
@@ -233,9 +232,9 @@ script = ExtResource( 15 )
 
 [node name="lineWidth" type="SpinBox" parent="GUI/CurveEditorPanel"]
 margin_left = 64.0
-margin_top = 104.0
+margin_top = 110.0
 margin_right = 124.0
-margin_bottom = 136.0
+margin_bottom = 139.0
 theme = ExtResource( 10 )
 min_value = 1.0
 value = 2.0
@@ -245,9 +244,9 @@ script = ExtResource( 14 )
 
 [node name="curveWidth" type="SpinBox" parent="GUI/CurveEditorPanel"]
 margin_left = 64.0
-margin_top = 184.0
+margin_top = 190.0
 margin_right = 124.0
-margin_bottom = 216.0
+margin_bottom = 219.0
 theme = ExtResource( 10 )
 min_value = 1.0
 value = 4.0
@@ -278,16 +277,17 @@ text = "Preenchido"
 script = ExtResource( 18 )
 
 [node name="editPoints" type="Label" parent="GUI/CurveEditorPanel"]
-margin_right = 72.0
-margin_bottom = 32.0
+margin_left = 3.0
+margin_right = 82.0
+margin_bottom = 39.0
 theme = ExtResource( 10 )
 text = "Pontos"
 
 [node name="sizePoints" type="Label" parent="GUI/CurveEditorPanel"]
 margin_left = 8.0
-margin_top = 28.0
+margin_top = 30.0
 margin_right = 80.0
-margin_bottom = 60.0
+margin_bottom = 62.0
 theme = ExtResource( 10 )
 custom_fonts/font = SubResource( 2 )
 text = "Pixels"
@@ -303,9 +303,9 @@ text = "Cor"
 
 [node name="sizeLines" type="Label" parent="GUI/CurveEditorPanel"]
 margin_left = 8.0
-margin_top = 108.0
+margin_top = 110.0
 margin_right = 80.0
-margin_bottom = 140.0
+margin_bottom = 142.0
 theme = ExtResource( 10 )
 custom_fonts/font = SubResource( 2 )
 text = "Pixels"
@@ -321,9 +321,9 @@ text = "Cor"
 
 [node name="sizeCurve" type="Label" parent="GUI/CurveEditorPanel"]
 margin_left = 8.0
-margin_top = 188.0
+margin_top = 190.0
 margin_right = 80.0
-margin_bottom = 220.0
+margin_bottom = 222.0
 theme = ExtResource( 10 )
 custom_fonts/font = SubResource( 2 )
 text = "Pixels"
@@ -338,16 +338,18 @@ custom_fonts/font = SubResource( 2 )
 text = "Cor"
 
 [node name="editLines" type="Label" parent="GUI/CurveEditorPanel"]
+margin_left = 3.0
 margin_top = 80.0
-margin_right = 66.0
-margin_bottom = 112.0
+margin_right = 75.0
+margin_bottom = 119.0
 theme = ExtResource( 10 )
 text = "Linhas"
 
 [node name="editCurves" type="Label" parent="GUI/CurveEditorPanel"]
+margin_left = 3.0
 margin_top = 160.0
-margin_right = 71.0
-margin_bottom = 192.0
+margin_right = 83.0
+margin_bottom = 199.0
 theme = ExtResource( 10 )
 text = "Curvas"
 
