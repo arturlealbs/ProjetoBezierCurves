@@ -1,15 +1,14 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/scenes/Main/CurvesHandler.gd" type="Script" id=1]
 [ext_resource path="res://src/scenes/Main/delButton.gd" type="Script" id=2]
 [ext_resource path="res://src/scenes/Main/addButton.gd" type="Script" id=3]
 [ext_resource path="res://src/scenes/Main/evalButton.gd" type="Script" id=4]
-[ext_resource path="res://src/scenes/Main/prevButton.gd" type="Script" id=5]
+[ext_resource path="res://src/scenes/Main/vPoints.gd" type="Script" id=5]
 [ext_resource path="res://src/scenes/Main/nextButton.gd" type="Script" id=6]
-[ext_resource path="res://src/scenes/Main/viewPolygon.gd" type="Script" id=7]
-[ext_resource path="res://src/scenes/Main/viewCurve.gd" type="Script" id=8]
-[ext_resource path="res://src/scenes/Main/viewPoints.gd" type="Script" id=9]
 [ext_resource path="res://button_theme.tres" type="Theme" id=10]
+[ext_resource path="res://src/scenes/Main/vLines.gd" type="Script" id=11]
+[ext_resource path="res://src/scenes/Main/vCurves.gd" type="Script" id=12]
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.0627451, 0, 0.215686, 1 )
@@ -20,8 +19,6 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 shadow_color = Color( 0.156863, 0.156863, 0.156863, 0.384314 )
 shadow_size = 2
-
-[sub_resource type="Theme" id=1]
 
 [node name="Main" type="HSplitContainer"]
 margin_right = 1024.0
@@ -35,162 +32,128 @@ margin_right = 1024.0
 margin_bottom = 600.0
 
 [node name="CurveManagerPanel" type="Panel" parent="GUI"]
-margin_right = 128.0
-margin_bottom = 264.0
+margin_left = 8.0
+margin_top = 100.0
+margin_right = 72.0
+margin_bottom = 500.0
 custom_styles/panel = SubResource( 2 )
 
 [node name="addButton" type="Button" parent="GUI/CurveManagerPanel"]
-anchor_left = 0.046875
-anchor_right = 0.046875
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 56.0
-margin_bottom = 56.0
+anchor_left = 0.210938
+anchor_top = 0.0618812
+anchor_right = 0.210938
+anchor_bottom = 0.0618812
+margin_left = -5.5
+margin_top = -17.0
+margin_right = 42.5
+margin_bottom = 31.0
 rect_pivot_offset = Vector2( -272, -16 )
 hint_tooltip = "Adicionar nova curva"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 theme = ExtResource( 10 )
-toggle_mode = true
+enabled_focus_mode = 0
 keep_pressed_outside = true
 text = "+"
 flat = true
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": true
-}
 
 [node name="delButton" type="Button" parent="GUI/CurveManagerPanel"]
-margin_left = 69.0
-margin_top = 5.0
-margin_right = 121.0
-margin_bottom = 57.0
+margin_left = 8.0
+margin_top = 64.0
+margin_right = 56.0
+margin_bottom = 112.0
 rect_pivot_offset = Vector2( 63, 61 )
 hint_tooltip = "Deletar Curva Selecionada"
+focus_mode = 0
 theme = ExtResource( 10 )
+enabled_focus_mode = 0
 keep_pressed_outside = true
 text = "x"
 flat = true
 script = ExtResource( 2 )
 
-[node name="prevButton" type="Button" parent="GUI/CurveManagerPanel"]
-margin_left = 10.0
-margin_top = 61.0
-margin_right = 62.0
-margin_bottom = 113.0
-rect_pivot_offset = Vector2( 44, 13 )
-hint_tooltip = "Selecinar Curva Anterior"
-theme = ExtResource( 10 )
-keep_pressed_outside = true
-text = "<"
-flat = true
-script = ExtResource( 5 )
-
 [node name="nextButton" type="Button" parent="GUI/CurveManagerPanel"]
-margin_left = 69.0
-margin_top = 61.0
-margin_right = 121.0
-margin_bottom = 113.0
+margin_left = 8.0
+margin_top = 120.0
+margin_right = 56.0
+margin_bottom = 168.0
 rect_pivot_offset = Vector2( 44, 13 )
 hint_tooltip = "Selecionar Próxima Curva"
+focus_mode = 0
 theme = ExtResource( 10 )
+enabled_focus_mode = 0
 keep_pressed_outside = true
 text = ">"
 flat = true
 script = ExtResource( 6 )
 
 [node name="evalButton" type="SpinBox" parent="GUI/CurveManagerPanel"]
-margin_left = 7.0
-margin_top = 120.0
-margin_right = 130.0
-margin_bottom = 172.0
+margin_left = 8.0
+margin_top = 176.0
+margin_right = 56.0
+margin_bottom = 224.0
 hint_tooltip = "Seleciona a Quantidade de Avaliações"
+theme = ExtResource( 10 )
 min_value = 1.0
 value = 20.0
 rounded = true
 allow_greater = true
+align = 1
 script = ExtResource( 4 )
 __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="viewPoints" type="CheckBox" parent="GUI/CurveManagerPanel"]
-margin_left = 13.0
-margin_top = 189.0
-margin_right = 85.0
-margin_bottom = 213.0
+[node name="vPoints" type="Button" parent="GUI/CurveManagerPanel"]
+margin_left = 8.0
+margin_top = 232.0
+margin_right = 56.0
+margin_bottom = 280.0
+rect_pivot_offset = Vector2( 6, 20 )
 hint_tooltip = "Visualizar Pontos de Controle"
+focus_mode = 0
+theme = ExtResource( 10 )
+toggle_mode = true
 pressed = true
-text = "Pontos"
-script = ExtResource( 9 )
-__meta__ = {
-"_editor_description_": ""
-}
+enabled_focus_mode = 0
+text = "P"
+script = ExtResource( 5 )
 
-[node name="viewPolygon" type="CheckBox" parent="GUI/CurveManagerPanel"]
-margin_left = 14.0
-margin_top = 208.0
-margin_right = 107.0
-margin_bottom = 232.0
-hint_tooltip = "Visuliazar Poligonais de Controle"
+[node name="vLines" type="Button" parent="GUI/CurveManagerPanel"]
+margin_left = 8.0
+margin_top = 288.0
+margin_right = 56.0
+margin_bottom = 336.0
+rect_pivot_offset = Vector2( 6, 20 )
+hint_tooltip = "Visualizar Linhas de Controle"
+focus_mode = 0
+theme = ExtResource( 10 )
+toggle_mode = true
 pressed = true
-text = "Poligonais"
-script = ExtResource( 7 )
+enabled_focus_mode = 0
+text = "L"
+script = ExtResource( 11 )
 
-[node name="viewCurve" type="CheckBox" parent="GUI/CurveManagerPanel"]
-margin_left = 14.0
-margin_top = 231.0
-margin_right = 85.0
-margin_bottom = 255.0
-hint_tooltip = "Visualizar Curvas de Bezier"
+[node name="vCurves" type="Button" parent="GUI/CurveManagerPanel"]
+margin_left = 8.0
+margin_top = 344.0
+margin_right = 56.0
+margin_bottom = 392.0
+rect_pivot_offset = Vector2( 6, 20 )
+hint_tooltip = "Visualizar Curva de Bezier"
+focus_mode = 0
+theme = ExtResource( 10 )
+toggle_mode = true
 pressed = true
-text = "Curvas"
-script = ExtResource( 8 )
-
-[node name="labelView" type="Label" parent="GUI/CurveManagerPanel"]
-margin_left = 9.0
-margin_top = 176.0
-margin_right = 49.0
-margin_bottom = 190.0
-text = "Visualizar:"
-
-[node name="BackgroundPanel" type="Panel" parent="GUI"]
-visible = false
-margin_right = 115.0
-margin_bottom = 600.0
-
-[node name="CurveEditorPanel" type="Panel" parent="GUI"]
-visible = false
-margin_top = 266.0
-margin_right = 128.0
-margin_bottom = 530.0
-
-[node name="ColorPickerButton" type="ColorPickerButton" parent="GUI/CurveEditorPanel"]
-margin_left = 60.0
-margin_top = 20.0
-margin_right = 112.0
-margin_bottom = 53.0
-theme = SubResource( 1 )
-color = Color( 1, 1, 1, 1 )
-
-[node name="ColorPickerButton2" type="ColorPickerButton" parent="GUI/CurveEditorPanel"]
-margin_left = 61.0
-margin_top = 62.0
-margin_right = 113.0
-margin_bottom = 95.0
-color = Color( 1, 1, 1, 1 )
-
-[node name="ColorPickerButton3" type="ColorPickerButton" parent="GUI/CurveEditorPanel"]
-margin_left = 64.0
-margin_top = 112.0
-margin_right = 116.0
-margin_bottom = 145.0
-color = Color( 1, 1, 1, 1 )
+enabled_focus_mode = 0
+text = "C"
+script = ExtResource( 12 )
 
 [connection signal="pressed" from="GUI/CurveManagerPanel/addButton" to="GUI/CurveManagerPanel/addButton" method="_on_addButton_pressed"]
 [connection signal="pressed" from="GUI/CurveManagerPanel/delButton" to="GUI/CurveManagerPanel/delButton" method="_on_delButton_pressed"]
-[connection signal="pressed" from="GUI/CurveManagerPanel/prevButton" to="GUI/CurveManagerPanel/prevButton" method="_on_prevButton_pressed"]
 [connection signal="pressed" from="GUI/CurveManagerPanel/nextButton" to="GUI/CurveManagerPanel/nextButton" method="_on_nextButton_pressed"]
 [connection signal="value_changed" from="GUI/CurveManagerPanel/evalButton" to="GUI/CurveManagerPanel/evalButton" method="_on_evalButton_value_changed"]
-[connection signal="pressed" from="GUI/CurveManagerPanel/viewPoints" to="GUI/CurveManagerPanel/viewPoints" method="_on_viewPoints_pressed"]
-[connection signal="pressed" from="GUI/CurveManagerPanel/viewPolygon" to="GUI/CurveManagerPanel/viewPolygon" method="_on_viewPolygon_pressed"]
-[connection signal="pressed" from="GUI/CurveManagerPanel/viewCurve" to="GUI/CurveManagerPanel/viewCurve" method="_on_viewCurve_pressed"]
+[connection signal="pressed" from="GUI/CurveManagerPanel/vPoints" to="GUI/CurveManagerPanel/vPoints" method="_on_vPoints_pressed"]
+[connection signal="pressed" from="GUI/CurveManagerPanel/vLines" to="GUI/CurveManagerPanel/vLines" method="_on_vLines_pressed"]
+[connection signal="pressed" from="GUI/CurveManagerPanel/vCurves" to="GUI/CurveManagerPanel/vCurves" method="_on_vCurves_pressed"]
