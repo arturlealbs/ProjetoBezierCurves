@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://src/scenes/Main/CurvesHandler.gd" type="Script" id=1]
 [ext_resource path="res://src/scenes/Main/delButton.gd" type="Script" id=2]
@@ -10,18 +10,23 @@
 [ext_resource path="res://src/scenes/Main/viewCurve.gd" type="Script" id=8]
 [ext_resource path="res://src/scenes/Main/viewPoints.gd" type="Script" id=9]
 [ext_resource path="res://button_theme.tres" type="Theme" id=10]
+[ext_resource path="res://src/scenes/Main/pointColorPicker.gd" type="Script" id=11]
+[ext_resource path="res://src/scenes/Main/lineColorPicker.gd" type="Script" id=12]
+[ext_resource path="res://src/scenes/Main/curveColorPicker.gd" type="Script" id=13]
+[ext_resource path="res://src/scenes/Main/lineWidth.gd" type="Script" id=14]
+[ext_resource path="res://src/scenes/Main/pointRadius.gd" type="Script" id=15]
+[ext_resource path="res://src/scenes/Main/curveWidth.gd" type="Script" id=16]
+[ext_resource path="res://src/scenes/Main/antilasedButton.gd" type="Script" id=17]
+[ext_resource path="res://src/scenes/Main/hollowPoints.gd" type="Script" id=18]
+[ext_resource path="res://OpenDyslexic-Regular.otf" type="DynamicFontData" id=19]
+[ext_resource path="res://panel_theme.tres" type="StyleBox" id=20]
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.0627451, 0, 0.215686, 1 )
-border_color = Color( 0, 0, 0, 1 )
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-shadow_color = Color( 0.156863, 0.156863, 0.156863, 0.384314 )
-shadow_size = 2
 
-[sub_resource type="Theme" id=1]
+[sub_resource type="DynamicFont" id=1]
+size = 17
+font_data = ExtResource( 19 )
 
 [node name="Main" type="HSplitContainer"]
 margin_right = 1024.0
@@ -34,92 +39,99 @@ script = ExtResource( 1 )
 margin_right = 1024.0
 margin_bottom = 600.0
 
+[node name="BackgroundPanel" type="Panel" parent="GUI"]
+margin_right = 130.0
+margin_bottom = 952.0
+custom_styles/panel = SubResource( 2 )
+
 [node name="CurveManagerPanel" type="Panel" parent="GUI"]
 margin_right = 128.0
-margin_bottom = 264.0
-custom_styles/panel = SubResource( 2 )
+margin_bottom = 288.0
+custom_styles/panel = ExtResource( 20 )
 
 [node name="addButton" type="Button" parent="GUI/CurveManagerPanel"]
 anchor_left = 0.046875
 anchor_right = 0.046875
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 56.0
-margin_bottom = 56.0
+margin_left = -6.0
+margin_right = 58.0
+margin_bottom = 64.0
 rect_pivot_offset = Vector2( -272, -16 )
 hint_tooltip = "Adicionar nova curva"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 theme = ExtResource( 10 )
-toggle_mode = true
+enabled_focus_mode = 0
 keep_pressed_outside = true
 text = "+"
-flat = true
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": true
-}
 
 [node name="delButton" type="Button" parent="GUI/CurveManagerPanel"]
-margin_left = 69.0
-margin_top = 5.0
-margin_right = 121.0
-margin_bottom = 57.0
+margin_left = 64.0
+margin_right = 128.0
+margin_bottom = 64.0
 rect_pivot_offset = Vector2( 63, 61 )
 hint_tooltip = "Deletar Curva Selecionada"
+focus_mode = 0
 theme = ExtResource( 10 )
+enabled_focus_mode = 0
 keep_pressed_outside = true
 text = "x"
-flat = true
 script = ExtResource( 2 )
 
 [node name="prevButton" type="Button" parent="GUI/CurveManagerPanel"]
-margin_left = 10.0
-margin_top = 61.0
-margin_right = 62.0
-margin_bottom = 113.0
+margin_top = 64.0
+margin_right = 64.0
+margin_bottom = 128.0
 rect_pivot_offset = Vector2( 44, 13 )
 hint_tooltip = "Selecinar Curva Anterior"
+focus_mode = 0
 theme = ExtResource( 10 )
+enabled_focus_mode = 0
 keep_pressed_outside = true
 text = "<"
-flat = true
 script = ExtResource( 5 )
 
 [node name="nextButton" type="Button" parent="GUI/CurveManagerPanel"]
-margin_left = 69.0
-margin_top = 61.0
-margin_right = 121.0
-margin_bottom = 113.0
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 128.0
+margin_bottom = 128.0
 rect_pivot_offset = Vector2( 44, 13 )
 hint_tooltip = "Selecionar Próxima Curva"
+focus_mode = 0
 theme = ExtResource( 10 )
+enabled_focus_mode = 0
 keep_pressed_outside = true
 text = ">"
-flat = true
 script = ExtResource( 6 )
 
 [node name="evalButton" type="SpinBox" parent="GUI/CurveManagerPanel"]
-margin_left = 7.0
-margin_top = 120.0
-margin_right = 130.0
-margin_bottom = 172.0
+margin_left = 56.0
+margin_top = 128.0
+margin_right = 128.0
+margin_bottom = 160.0
 hint_tooltip = "Seleciona a Quantidade de Avaliações"
+theme = ExtResource( 10 )
 min_value = 1.0
 value = 20.0
 rounded = true
 allow_greater = true
+align = 2
 script = ExtResource( 4 )
 __meta__ = {
 "_editor_description_": ""
 }
 
 [node name="viewPoints" type="CheckBox" parent="GUI/CurveManagerPanel"]
-margin_left = 13.0
-margin_top = 189.0
-margin_right = 85.0
-margin_bottom = 213.0
+margin_left = 8.0
+margin_top = 192.0
+margin_right = 87.0
+margin_bottom = 220.0
 hint_tooltip = "Visualizar Pontos de Controle"
+focus_mode = 0
+theme = ExtResource( 10 )
 pressed = true
+enabled_focus_mode = 0
 text = "Pontos"
 script = ExtResource( 9 )
 __meta__ = {
@@ -127,64 +139,214 @@ __meta__ = {
 }
 
 [node name="viewPolygon" type="CheckBox" parent="GUI/CurveManagerPanel"]
-margin_left = 14.0
-margin_top = 208.0
-margin_right = 107.0
-margin_bottom = 232.0
+margin_left = 8.0
+margin_top = 224.0
+margin_right = 113.0
+margin_bottom = 252.0
 hint_tooltip = "Visuliazar Poligonais de Controle"
+focus_mode = 0
+theme = ExtResource( 10 )
 pressed = true
+enabled_focus_mode = 0
 text = "Poligonais"
 script = ExtResource( 7 )
 
 [node name="viewCurve" type="CheckBox" parent="GUI/CurveManagerPanel"]
-margin_left = 14.0
-margin_top = 231.0
-margin_right = 85.0
-margin_bottom = 255.0
+margin_left = 8.0
+margin_top = 256.0
+margin_right = 89.0
+margin_bottom = 284.0
 hint_tooltip = "Visualizar Curvas de Bezier"
+focus_mode = 0
+theme = ExtResource( 10 )
 pressed = true
+enabled_focus_mode = 0
 text = "Curvas"
 script = ExtResource( 8 )
 
 [node name="labelView" type="Label" parent="GUI/CurveManagerPanel"]
-margin_left = 9.0
-margin_top = 176.0
-margin_right = 49.0
-margin_bottom = 190.0
+margin_left = 8.0
+margin_top = 160.0
+margin_right = 111.0
+margin_bottom = 192.0
+theme = ExtResource( 10 )
 text = "Visualizar:"
 
-[node name="BackgroundPanel" type="Panel" parent="GUI"]
-visible = false
-margin_right = 115.0
-margin_bottom = 600.0
+[node name="labelEval" type="Label" parent="GUI/CurveManagerPanel"]
+margin_left = 8.0
+margin_top = 128.0
+margin_right = 104.0
+margin_bottom = 160.0
+theme = ExtResource( 10 )
+text = "Eval:"
 
 [node name="CurveEditorPanel" type="Panel" parent="GUI"]
-visible = false
-margin_top = 266.0
+margin_top = 293.0
 margin_right = 128.0
-margin_bottom = 530.0
+margin_bottom = 597.0
+custom_styles/panel = ExtResource( 20 )
 
-[node name="ColorPickerButton" type="ColorPickerButton" parent="GUI/CurveEditorPanel"]
-margin_left = 60.0
-margin_top = 20.0
-margin_right = 112.0
-margin_bottom = 53.0
-theme = SubResource( 1 )
+[node name="pointColorPicker" type="ColorPickerButton" parent="GUI/CurveEditorPanel"]
+margin_left = 120.0
+margin_top = 56.0
+margin_right = 152.0
+margin_bottom = 97.0
+rect_rotation = 90.0
+theme = ExtResource( 10 )
 color = Color( 1, 1, 1, 1 )
+script = ExtResource( 11 )
 
-[node name="ColorPickerButton2" type="ColorPickerButton" parent="GUI/CurveEditorPanel"]
-margin_left = 61.0
-margin_top = 62.0
-margin_right = 113.0
-margin_bottom = 95.0
+[node name="lineColorPicker" type="ColorPickerButton" parent="GUI/CurveEditorPanel"]
+margin_left = 120.0
+margin_top = 136.0
+margin_right = 152.0
+margin_bottom = 177.0
+rect_rotation = 90.0
+theme = ExtResource( 10 )
 color = Color( 1, 1, 1, 1 )
+script = ExtResource( 12 )
 
-[node name="ColorPickerButton3" type="ColorPickerButton" parent="GUI/CurveEditorPanel"]
+[node name="curveColorPicker" type="ColorPickerButton" parent="GUI/CurveEditorPanel"]
+margin_left = 120.0
+margin_top = 216.0
+margin_right = 152.0
+margin_bottom = 257.0
+rect_rotation = 90.0
+theme = ExtResource( 10 )
+color = Color( 0.980392, 0.258824, 0.541176, 1 )
+script = ExtResource( 13 )
+
+[node name="pointRadius" type="SpinBox" parent="GUI/CurveEditorPanel"]
 margin_left = 64.0
-margin_top = 112.0
-margin_right = 116.0
-margin_bottom = 145.0
-color = Color( 1, 1, 1, 1 )
+margin_top = 24.0
+margin_right = 124.0
+margin_bottom = 56.0
+theme = ExtResource( 10 )
+min_value = 1.0
+value = 5.0
+allow_greater = true
+align = 2
+script = ExtResource( 15 )
+
+[node name="lineWidth" type="SpinBox" parent="GUI/CurveEditorPanel"]
+margin_left = 64.0
+margin_top = 104.0
+margin_right = 124.0
+margin_bottom = 136.0
+theme = ExtResource( 10 )
+min_value = 1.0
+value = 2.0
+allow_greater = true
+align = 2
+script = ExtResource( 14 )
+
+[node name="curveWidth" type="SpinBox" parent="GUI/CurveEditorPanel"]
+margin_left = 64.0
+margin_top = 184.0
+margin_right = 124.0
+margin_bottom = 216.0
+theme = ExtResource( 10 )
+min_value = 1.0
+value = 4.0
+allow_greater = true
+align = 2
+script = ExtResource( 16 )
+
+[node name="antilasedButton" type="CheckBox" parent="GUI/CurveEditorPanel"]
+margin_top = 248.0
+margin_right = 115.0
+margin_bottom = 280.0
+focus_mode = 0
+theme = ExtResource( 10 )
+pressed = true
+enabled_focus_mode = 0
+text = "Antialised"
+script = ExtResource( 17 )
+
+[node name="hollowPoints" type="CheckBox" parent="GUI/CurveEditorPanel"]
+margin_top = 272.0
+margin_right = 128.0
+margin_bottom = 304.0
+focus_mode = 0
+theme = ExtResource( 10 )
+pressed = true
+enabled_focus_mode = 0
+text = "Preenchido"
+script = ExtResource( 18 )
+
+[node name="editPoints" type="Label" parent="GUI/CurveEditorPanel"]
+margin_right = 72.0
+margin_bottom = 32.0
+theme = ExtResource( 10 )
+text = "Pontos"
+
+[node name="sizePoints" type="Label" parent="GUI/CurveEditorPanel"]
+margin_left = 8.0
+margin_top = 28.0
+margin_right = 80.0
+margin_bottom = 60.0
+theme = ExtResource( 10 )
+custom_fonts/font = SubResource( 1 )
+text = "Pixels"
+
+[node name="colorPoints" type="Label" parent="GUI/CurveEditorPanel"]
+margin_left = 8.0
+margin_top = 56.0
+margin_right = 80.0
+margin_bottom = 88.0
+theme = ExtResource( 10 )
+custom_fonts/font = SubResource( 1 )
+text = "Cor"
+
+[node name="sizeLines" type="Label" parent="GUI/CurveEditorPanel"]
+margin_left = 8.0
+margin_top = 108.0
+margin_right = 80.0
+margin_bottom = 140.0
+theme = ExtResource( 10 )
+custom_fonts/font = SubResource( 1 )
+text = "Pixels"
+
+[node name="colorLines" type="Label" parent="GUI/CurveEditorPanel"]
+margin_left = 8.0
+margin_top = 136.0
+margin_right = 80.0
+margin_bottom = 168.0
+theme = ExtResource( 10 )
+custom_fonts/font = SubResource( 1 )
+text = "Cor"
+
+[node name="sizeCurve" type="Label" parent="GUI/CurveEditorPanel"]
+margin_left = 8.0
+margin_top = 188.0
+margin_right = 80.0
+margin_bottom = 220.0
+theme = ExtResource( 10 )
+custom_fonts/font = SubResource( 1 )
+text = "Pixels"
+
+[node name="colorCurve" type="Label" parent="GUI/CurveEditorPanel"]
+margin_left = 8.0
+margin_top = 216.0
+margin_right = 80.0
+margin_bottom = 248.0
+theme = ExtResource( 10 )
+custom_fonts/font = SubResource( 1 )
+text = "Cor"
+
+[node name="editLines" type="Label" parent="GUI/CurveEditorPanel"]
+margin_top = 80.0
+margin_right = 66.0
+margin_bottom = 112.0
+theme = ExtResource( 10 )
+text = "Linhas"
+
+[node name="editCurves" type="Label" parent="GUI/CurveEditorPanel"]
+margin_top = 160.0
+margin_right = 71.0
+margin_bottom = 192.0
+theme = ExtResource( 10 )
+text = "Curvas"
 
 [connection signal="pressed" from="GUI/CurveManagerPanel/addButton" to="GUI/CurveManagerPanel/addButton" method="_on_addButton_pressed"]
 [connection signal="pressed" from="GUI/CurveManagerPanel/delButton" to="GUI/CurveManagerPanel/delButton" method="_on_delButton_pressed"]
@@ -194,3 +356,11 @@ color = Color( 1, 1, 1, 1 )
 [connection signal="pressed" from="GUI/CurveManagerPanel/viewPoints" to="GUI/CurveManagerPanel/viewPoints" method="_on_viewPoints_pressed"]
 [connection signal="pressed" from="GUI/CurveManagerPanel/viewPolygon" to="GUI/CurveManagerPanel/viewPolygon" method="_on_viewPolygon_pressed"]
 [connection signal="pressed" from="GUI/CurveManagerPanel/viewCurve" to="GUI/CurveManagerPanel/viewCurve" method="_on_viewCurve_pressed"]
+[connection signal="color_changed" from="GUI/CurveEditorPanel/pointColorPicker" to="GUI/CurveEditorPanel/pointColorPicker" method="_on_pointColorPicker_color_changed"]
+[connection signal="color_changed" from="GUI/CurveEditorPanel/lineColorPicker" to="GUI/CurveEditorPanel/lineColorPicker" method="_on_lineColorPicker_color_changed"]
+[connection signal="color_changed" from="GUI/CurveEditorPanel/curveColorPicker" to="GUI/CurveEditorPanel/curveColorPicker" method="_on_curveColorPicker_color_changed"]
+[connection signal="value_changed" from="GUI/CurveEditorPanel/pointRadius" to="GUI/CurveEditorPanel/pointRadius" method="_on_pointRadius_value_changed"]
+[connection signal="value_changed" from="GUI/CurveEditorPanel/lineWidth" to="GUI/CurveEditorPanel/lineWidth" method="_on_lineWidth_value_changed"]
+[connection signal="value_changed" from="GUI/CurveEditorPanel/curveWidth" to="GUI/CurveEditorPanel/curveWidth" method="_on_curveWidth_value_changed"]
+[connection signal="pressed" from="GUI/CurveEditorPanel/antilasedButton" to="GUI/CurveEditorPanel/antilasedButton" method="_on_antilasedButton_pressed"]
+[connection signal="pressed" from="GUI/CurveEditorPanel/hollowPoints" to="GUI/CurveEditorPanel/hollowPoints" method="_on_hollowPoints_pressed"]
