@@ -107,7 +107,7 @@ func drawControlPointsOf(curve: BezierCurve, radius: float, color: Color, select
 func drawHollowControlPointsOf(curve: BezierCurve, radius: float, color: Color, selected: bool) -> void:
 	for point in curve.controlPoints:
 		if isDraggingPoint:
-			if point == curve.controlPoints[selectedPointIndex] and selected:
+			if selected and point == curve.controlPoints[selectedPointIndex]:
 				draw_arc(point, radius + 4, 0, TAU, 20, color,3)
 				draw_circle(point, radius + 2, backgroundColor)
 			else:
