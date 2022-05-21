@@ -139,9 +139,9 @@ func drawCurveAsNotSelected(curve: BezierCurve) -> void:
 
 	if drawPoints:
 		if hollowPoints:
-			drawHollowControlPointsOf(curve, pointRadius, colorOfUnselectedCurve, true)
+			drawHollowControlPointsOf(curve, pointRadius, colorOfUnselectedCurve, false)
 		else:
-			drawControlPointsOf(curve, pointRadius, colorOfUnselectedCurve, true)
+			drawControlPointsOf(curve, pointRadius, colorOfUnselectedCurve, false)
 
 func _draw() -> void:
 	for bezierCurve in bezierCurves:
