@@ -22,8 +22,8 @@ _global_script_class_icons={
 
 config/name="BezierCurves"
 run/main_scene="res://src/scenes/Main/Main.tscn"
-run/delta_sync_after_draw=true
 config/icon="res://icon.png"
+run/delta_sync_after_draw=true
 
 [physics]
 

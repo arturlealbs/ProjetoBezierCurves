@@ -21,16 +21,19 @@
 [ext_resource path="res://OpenDyslexic-Regular.otf" type="DynamicFontData" id=19]
 [ext_resource path="res://panel_theme.tres" type="StyleBox" id=20]
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0627451, 0, 0.215686, 1 )
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=2]
 size = 17
 font_data = ExtResource( 19 )
 
 [node name="Main" type="HSplitContainer"]
 margin_right = 1024.0
 margin_bottom = 600.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="CurvesHandler" type="Node2D" parent="."]
 script = ExtResource( 1 )
@@ -42,7 +45,7 @@ margin_bottom = 600.0
 [node name="BackgroundPanel" type="Panel" parent="GUI"]
 margin_right = 130.0
 margin_bottom = 952.0
-custom_styles/panel = SubResource( 2 )
+custom_styles/panel = SubResource( 1 )
 
 [node name="CurveManagerPanel" type="Panel" parent="GUI"]
 margin_right = 128.0
@@ -286,7 +289,7 @@ margin_top = 28.0
 margin_right = 80.0
 margin_bottom = 60.0
 theme = ExtResource( 10 )
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Pixels"
 
 [node name="colorPoints" type="Label" parent="GUI/CurveEditorPanel"]
@@ -295,7 +298,7 @@ margin_top = 56.0
 margin_right = 80.0
 margin_bottom = 88.0
 theme = ExtResource( 10 )
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Cor"
 
 [node name="sizeLines" type="Label" parent="GUI/CurveEditorPanel"]
@@ -304,7 +307,7 @@ margin_top = 108.0
 margin_right = 80.0
 margin_bottom = 140.0
 theme = ExtResource( 10 )
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Pixels"
 
 [node name="colorLines" type="Label" parent="GUI/CurveEditorPanel"]
@@ -313,7 +316,7 @@ margin_top = 136.0
 margin_right = 80.0
 margin_bottom = 168.0
 theme = ExtResource( 10 )
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Cor"
 
 [node name="sizeCurve" type="Label" parent="GUI/CurveEditorPanel"]
@@ -322,7 +325,7 @@ margin_top = 188.0
 margin_right = 80.0
 margin_bottom = 220.0
 theme = ExtResource( 10 )
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Pixels"
 
 [node name="colorCurve" type="Label" parent="GUI/CurveEditorPanel"]
@@ -331,7 +334,7 @@ margin_top = 216.0
 margin_right = 80.0
 margin_bottom = 248.0
 theme = ExtResource( 10 )
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Cor"
 
 [node name="editLines" type="Label" parent="GUI/CurveEditorPanel"]

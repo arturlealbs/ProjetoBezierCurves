@@ -97,7 +97,7 @@ func drawCurveOf(curve: BezierCurve, color: Color, width: float, antialiased: bo
 func drawControlPointsOf(curve: BezierCurve, radius: float, color: Color, selected: bool) -> void:
 	for point in curve.controlPoints:
 		if isDraggingPoint:
-			if point == curve.controlPoints[selectedPointIndex] and selected:
+			if selected and point == curve.controlPoints[selectedPointIndex]:
 				draw_circle(point, radius + 2, color)
 			else:
 				draw_circle(point, radius, color)
