@@ -6,7 +6,7 @@ export(bool) var hollowPoints := false
 export(Color) var pointColorOfSelectedCurve := Color(1,1,1)
 export(Color) var lineColorOfSelectedCurve  := Color(1,1,1)
 export(Color) var curveColorOfSelectedCurve := Color(0.98,0.26,0.54)
-export(Color) var colorOfUnselectedCurve := Color(0.35, 0.35, 0.35, 1)
+export(Color) var colorOfUnselectedCurve := Color(0.09, 0.081, 0.148, 1)
 export(Color) var backgroundColor := Color(0.04,0.031,0.098)
 
 export(int) var pointRadius := 5
@@ -40,7 +40,7 @@ func getSelectedPointIndex(mousePosition: Vector2) -> int:
 func isCurveCondition(event: InputEvent) -> bool:
 	return (event is InputEventMouseButton
 		and event.pressed
-		and event.position[0] > 115
+		and event.position[0] > 138
 		and selectedCurveIndex >= 0)
 
 func isAddControlPoint(event: InputEvent) -> bool:
