@@ -93,10 +93,10 @@ func drawCurveOf(curve: BezierCurve, color: Color, width: float, antialiased: bo
 		for i in range(len(curve.curvePoints) - 1):
 			draw_line(curve.curvePoints[i], curve.curvePoints[i + 1], color, width, antialiased)
 
-func drawControlPointsOf(curve: BezierCurve, radius: float, color: Color) -> void:
+func drawControlPointsOf(curve: BezierCurve, radius: float, color: Color, selected: bool) -> void:
 	for point in curve.controlPoints:
 		if isDraggingPoint:
-			if point == curve.controlPoints[selectedPointIndex]:
+			if point == curve.controlPoints[selectedPointIndex] and selected:
 				draw_arc(point, 10, 0, TAU, 20, color,3)
 				draw_circle(point, radius + 2, backgroundColor)
 			else:
@@ -115,7 +115,7 @@ func drawCurveAsSelected(curve: BezierCurve) -> void:
 		drawCurveOf(curve, curveColorOfSelectedCurve, curveWidth, self.antialiased)
 
 	if drawPoints:
-		drawControlPointsOf(curve, pointRadius, pointColorOfSelectedCurve)
+		drawControlPointsOf(curve, pointRadius, pointColorOfSelectedCurve, true)
 
 func drawCurveAsNotSelected(curve: BezierCurve) -> void:
 	if drawLines:
@@ -125,7 +125,7 @@ func drawCurveAsNotSelected(curve: BezierCurve) -> void:
 		drawCurveOf(curve, colorOfUnselectedCurve, curveWidth, antialiased)
 
 	if drawPoints:
-		drawControlPointsOf(curve, pointRadius, colorOfUnselectedCurve)
+		drawControlPointsOf(curve, pointRadius, colorOfUnselectedCurve, false)
 
 func _draw() -> void:
 	for bezierCurve in bezierCurves:
