@@ -1,6 +1,5 @@
 [gd_resource type="Theme" load_steps=8 format=2]
 
-[ext_resource path="res://MusticaPro-SemiBold.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://OpenDyslexic-Regular.otf" type="DynamicFontData" id=2]
 
 [sub_resource type="DynamicFont" id=2]
@@ -23,7 +22,7 @@ anti_aliasing = false
 size = 24
 extra_spacing_char = -1
 extra_spacing_space = -6
-font_data = ExtResource( 1 )
+font_data = ExtResource( 2 )
 
 [sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.0627451, 0, 0.215686, 1 )
