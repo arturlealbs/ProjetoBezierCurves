@@ -26,7 +26,7 @@ var isDraggingPoint := false
 func getSelectedPointIndex(mousePosition: Vector2) -> int:
 	# TODO: use squared distance
 	# TODO: use for controlPoint in selectedCurve.controlPoints
-	var allowedDistance := 7.0
+	var allowedDistance := pointRadius + 2
 	var allowedDistanceSquared := allowedDistance*allowedDistance
 
 	var selectedCurve: BezierCurve = bezierCurves[selectedCurveIndex]
